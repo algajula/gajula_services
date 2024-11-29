@@ -3,14 +3,15 @@ package com.gajula.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "APP_USER", schema = "book_services")
-public class UserDto implements Serializable {
+@Table(name = "USER_INFO", schema = "book_services")
+public class User_Info implements Serializable {
 
     @Id
     @GeneratedValue(generator = "userid_seq_id", strategy = GenerationType.SEQUENCE)
@@ -42,25 +43,17 @@ public class UserDto implements Serializable {
     @Column(name = "EMAIL_ADDRESS")
     private String emailAddress;
 
-    @Column(name = "FLAT")
-    private String flat;
-    @Column(name = "STREET")
-    private String street;
-    @Column(name = "AREA")
-    private String area;
-    @Column(name = "landmark")
-    private String landmark;
+    @Column(name = "CREATED_DATE", columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @CreatedDate
+    private Date createdDate;
 
-    @Column(name = "COUNTRY")
-    private String country;
-    @Column(name = "STATE")
-    private String state;
-    @Column(name = "CITY")
-    private String city;
-    @Column(name = "TOWN")
-    private String town;
-    @Column(name = "ZIPCODE")
-    private String zipcode;
+    @Column(name = "MODIFIED_DATE", columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @LastModifiedDate
+    private Date modifiedDate;
 
     public BigInteger getUser_uid() {
         return user_uid;
@@ -150,81 +143,25 @@ public class UserDto implements Serializable {
         this.emailAddress = emailAddress;
     }
 
-    public String getFlat() {
-        return flat;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setFlat(String flat) {
-        this.flat = flat;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getStreet() {
-        return street;
+    public Date getModifiedDate() {
+        return modifiedDate;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getLandmark() {
-        return landmark;
-    }
-
-    public void setLandmark(String landmark) {
-        this.landmark = landmark;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 
     @Override
     public String toString() {
-        return "UserDto{" +
+        return "User_Info{" +
                 "user_uid=" + user_uid +
                 ", userid=" + userid +
                 ", FULL_name='" + FULL_name + '\'' +
@@ -236,15 +173,6 @@ public class UserDto implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", alternatePhone='" + alternatePhone + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
-                ", flat='" + flat + '\'' +
-                ", street='" + street + '\'' +
-                ", area='" + area + '\'' +
-                ", landmark='" + landmark + '\'' +
-                ", country='" + country + '\'' +
-                ", state='" + state + '\'' +
-                ", city='" + city + '\'' +
-                ", town='" + town + '\'' +
-                ", zipcode='" + zipcode + '\'' +
                 '}';
     }
 }

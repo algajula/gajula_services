@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-        <h1> User Regidtration</h1>
+        <h1> User Registration</h1>
         <img src="../images/K2.jpg" height="30" width="30"/>
     </div>
 

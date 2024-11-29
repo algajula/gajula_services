@@ -1,7 +1,9 @@
 package com.gajula.service;
 
-import com.gajula.dto.UserDto;
+import com.gajula.dto.Address_Info;
+import com.gajula.dto.User_Info;
 import com.gajula.model.ResponseBean;
+import com.gajula.repository.AddressRepository;
 import com.gajula.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,10 +21,13 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
+
     @Override
     public ResponseBean getAllUsers() throws Exception {
         ResponseBean response = new ResponseBean();
-        List<UserDto> list = new ArrayList<UserDto>();
+        List<User_Info> list = new ArrayList<User_Info>();
         try {
             admin.info("getAllUsers start ");
             list = userRepository.findAll();
@@ -39,7 +44,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public ResponseBean getUserByUserid(String userid) throws Exception {
         ResponseBean response = new ResponseBean();
-        List<UserDto> list = new ArrayList<UserDto>();
+        List<User_Info> list = new ArrayList<User_Info>();
         try {
             admin.info("getUserByUserid start ");
             list = userRepository.getUserByUserid(userid);
@@ -51,5 +56,34 @@ public class UserServiceImpl implements UserService{
             admin.info("error in getUserByUserid=" + e.getMessage());
         }
         return response;
+    }
+
+    @Override
+    public boolean saveUserInfo(User_Info user) throws Exception {
+        boolean updateFlag = false;
+        User_Info userinfo = new User_Info();
+        try {
+            admin.info("saveUserInfo start ");
+            userinfo = (User_Info)userRepository.save(user);
+            updateFlag = true;
+            admin.info("saveUserInfo end");
+        } catch (Exception e) {
+            admin.info("error in saveUserInfo=" + e.getMessage());
+        }
+        return updateFlag;
+    }
+
+    @Override
+    public boolean saveAddressInfo(Address_Info addressInfo) throws Exception {
+        boolean updateFlag = false;
+        try {
+            admin.info("saveAddressInfo start ");
+            addressInfo = (Address_Info)addressRepository.save(addressInfo);
+            updateFlag = true;
+            admin.info("saveAddressInfo end");
+        } catch (Exception e) {
+            admin.info("error in saveAddressInfo=" + e.getMessage());
+        }
+        return updateFlag;
     }
 }

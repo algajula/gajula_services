@@ -5,11 +5,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(exclude= { HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude= { HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class, KafkaAutoConfiguration.class})
 @EnableScheduling
+//@EnableKafka
 public class Main {
 
 	private final static Logger admin = LogManager.getLogger("admin");
