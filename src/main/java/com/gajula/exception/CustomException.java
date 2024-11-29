@@ -1,21 +1,29 @@
 package com.gajula.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class BookResourceNotFound extends RuntimeException {
+public class CustomException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	private Throwable cause;
 	private String serviceName;
 	
-	public BookResourceNotFound(final String message, Throwable cause, String serviceName) {
+	public CustomException(String message, Throwable cause, String serviceName) {
 		super(message);
 		this.cause=cause;
 		this.serviceName=serviceName;
 	}
 
+	public CustomException(final String message) {
+		super(message);
+	}
+	
+	public CustomException(final Exception message) {
+		super(message);
+	}
+	
+	public CustomException(final Object message) {
+		super(message.toString());
+	}
+	
 	public synchronized Throwable getCause() {
 		return cause;
 	}
@@ -31,5 +39,6 @@ public class BookResourceNotFound extends RuntimeException {
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
+	
 	
 }

@@ -1,27 +1,19 @@
 package com.gajula.exception;
 
-public class BookCustomeException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class BadRequestException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	private Throwable cause;
 	private String serviceName;
 	
-	public BookCustomeException(String message, Throwable cause, String serviceName) {
+	public BadRequestException(final String message, Throwable cause, String serviceName) {
 		super(message);
 		this.cause=cause;
 		this.serviceName=serviceName;
-	}
-
-	public BookCustomeException(final String message) {
-		super(message);
-	}
-	
-	public BookCustomeException(final Exception message) {
-		super(message);
-	}
-	
-	public BookCustomeException(final Object message) {
-		super(message.toString());
 	}
 	
 	public synchronized Throwable getCause() {
@@ -39,6 +31,5 @@ public class BookCustomeException extends RuntimeException {
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
-	
-	
+
 }

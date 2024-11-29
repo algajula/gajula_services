@@ -1,7 +1,7 @@
 package com.gajula.controller;
 
 import com.gajula.dto.BookDto;
-import com.gajula.exception.BookCustomeException;
+import com.gajula.exception.CustomException;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.BookService;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +29,7 @@ public class BookRestController {
 			response = bookService.getAllBooks();
 			admin.info("===getAllBooks END===");
 		} catch (Exception e) {
-			throw new BookCustomeException("error occured in getAllBooks service" + e.getMessage());
+			throw new CustomException("error occured in getAllBooks service" + e.getMessage());
 		}
 		return response;
 	}
@@ -42,7 +42,7 @@ public class BookRestController {
 			response = bookService.getBooksByTitle(title);
 			admin.info("===getBookByTitle END===");
 		} catch (Exception e) {
-			throw new BookCustomeException("error occured in getBookByTitle service" + e.getMessage());
+			throw new CustomException("error occured in getBookByTitle service" + e.getMessage());
 		}
 		return response;
 	}
@@ -55,7 +55,7 @@ public class BookRestController {
 			response = bookService.getBooksByGenre(genre);
 			admin.info("===getBookByTitle END===");
 		} catch (Exception e) {
-			throw new BookCustomeException("error occured in getBookByGenre service" + e.getMessage());
+			throw new CustomException("error occured in getBookByGenre service" + e.getMessage());
 		}
 		return response;
 	}
@@ -73,7 +73,7 @@ public class BookRestController {
 			}
 			admin.info("===saveBook END===");
 		} catch (Exception e) {
-			throw new BookCustomeException("error occured in saveBook service" + e.getMessage());
+			throw new CustomException("error occured in saveBook service" + e.getMessage());
 		}
 		return response;
 	}

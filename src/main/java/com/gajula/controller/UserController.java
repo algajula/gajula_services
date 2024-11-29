@@ -1,6 +1,6 @@
 package com.gajula.controller;
 
-import com.gajula.exception.BookCustomeException;
+import com.gajula.exception.CustomException;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -27,7 +27,7 @@ public class UserController {
             response = userService.getAllUsers();
             admin.info("===getAllUsers END===");
         } catch (Exception e) {
-            throw new BookCustomeException("error occured in getAllUsers service" + e.getMessage());
+            throw new CustomException("error occured in getAllUsers service" + e.getMessage());
         }
         return response;
     }
@@ -41,7 +41,7 @@ public class UserController {
             response = userService.getUserByUserid(userid);
             admin.info("===getUserByUserid END===");
         } catch (Exception e) {
-            throw new BookCustomeException("error occured in getUserByUserid service" + e.getMessage());
+            throw new CustomException("error occured in getUserByUserid service" + e.getMessage());
         }
         return response;
     }

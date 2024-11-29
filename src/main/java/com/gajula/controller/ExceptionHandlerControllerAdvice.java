@@ -1,7 +1,7 @@
 package com.gajula.controller;
 
-import com.gajula.exception.BookBadrequest;
-import com.gajula.exception.BookCustomeException;
+import com.gajula.exception.BadRequestException;
+import com.gajula.exception.CustomException;
 import com.gajula.exception.ExceptionResponse;
 import com.gajula.util.APIConstants;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,8 +22,8 @@ public class ExceptionHandlerControllerAdvice {
 
 	private final static Logger admin = LogManager.getLogger("admin");
 	
-	@ExceptionHandler(BookCustomeException.class)
-	public ResponseEntity handleException(final BookCustomeException exception,
+	@ExceptionHandler(CustomException.class)
+	public ResponseEntity handleException(final CustomException exception,
 			final HttpServletRequest request) throws IOException {
 		ExceptionResponse error = new ExceptionResponse();
 		admin.info(":::INTERNAL_SERVER_ERROR::"+exception);
@@ -62,8 +62,8 @@ public class ExceptionHandlerControllerAdvice {
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BookBadrequest.class)
-    public ResponseEntity handleBadRequest(final BookBadrequest exception,
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity handleBadRequest(final BadRequestException exception,
 			final HttpServletRequest request) throws IOException {
 		admin.info("handleBadRequest ERROR");
 		ExceptionResponse error = new ExceptionResponse();
@@ -77,7 +77,7 @@ public class ExceptionHandlerControllerAdvice {
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ResponseEntity handleInternalserverError(final BookCustomeException exception,
+    public ResponseEntity handleInternalserverError(final CustomException exception,
 			final HttpServletRequest request) throws IOException {
 		admin.info("handleInternalserverError UNKNOWN SERVER ERROR ERROR");
 		ExceptionResponse error = new ExceptionResponse();
