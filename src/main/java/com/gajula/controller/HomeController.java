@@ -26,20 +26,4 @@ public class HomeController {
 		return "welcome";
 	}
 
-	@GetMapping("/userregister")
-	public String userregister(Model model) throws Exception{
-		User_Info user = new User_Info();
-		try{
-			admin.info("userregister start");
-			user.setFullName("Gajula Allabakash");
-			model.addAttribute("user", user);
-			List<String> professionList = Arrays.asList("Developer", "Designer", "Tester", "Architect");
-			model.addAttribute("professionList", professionList);
-			admin.info("userregister end");
-		}catch (Exception e){
-			admin.error("userregister error "+e.getMessage());
-		}
-		return "userregister";
-	}
-
 }

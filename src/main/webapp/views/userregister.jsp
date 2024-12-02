@@ -40,9 +40,9 @@
 <body>
 	<div align="center">
 		<h2>User Registration</h2>
-		<form:form action="api/v1/user/register" method="post" modelAttribute="user">
+		<form:form action="${pageContext.request.contextPath}/api/v1/user/register" method="post" modelAttribute="user">
 			<div>
-			<form:label path="fullName"><spring:message code="user.form.fullname"/>:</form:label>
+			<form:label path="fullName"><spring:message code="label.fullname"/>:</form:label>
 			<form:input path="fullName" />
 			<form:errors path="fullName" cssClass="error" />
 			</div>
@@ -55,7 +55,7 @@
 
 			<div>
 			<form:label path="phone">Phone:</form:label>
-			<form:password path="phone"/>
+			<form:input path="phone"/>
 			<form:errors path="phone" cssClass="error" />
 			</div>
 			

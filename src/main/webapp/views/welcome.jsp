@@ -9,6 +9,6 @@
     <h1>Services</h1>
     <a href='views/userregistration.jsp'>Signup</a>
     <br/>
-    <label> <a href="userregister">Register</a> </label>
+    <label> <a href="${pageContext.request.contextPath}/api/v1/user/register">Register</a> </label>
 </body>
 </html>

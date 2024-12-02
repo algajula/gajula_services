@@ -22,6 +22,7 @@ public class Main {
 			SpringApplication.run(Main.class, args);
 			admin.info("Spring Boot Main End");
 		}catch (Exception e){
+			e.printStackTrace();
 			admin.error("Spring Boot Main error "+e.getMessage());
 		}
 	}
