@@ -22,7 +22,7 @@ public class User_Info implements Serializable {
     @Column(name = "USERID")
     private BigInteger userid;
     @Column(name = "FULL_NAME")
-    private String FULL_name;
+    private String fullName;
     @Column(name = "FIRST_NAME")
     private String firstName;
     @Column(name = "LAST_NAME")
@@ -30,11 +30,13 @@ public class User_Info implements Serializable {
     @Column(name = "GENDER")
     private String gender;
     @Column(name = "MARITAL_STATUS")
-    private String maritalStatus;
+    private Boolean maritalStatus;
     @Column(name = "DATE_OF_BIRTH", columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dateOfBirth;
+    @Column(name = "OCCUPATION")
+    private String occupation;
 
     @Column(name = "PHONE", length = 10)
     private String phone;
@@ -71,12 +73,12 @@ public class User_Info implements Serializable {
         this.userid = userid;
     }
 
-    public String getFULL_name() {
-        return FULL_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFULL_name(String FULL_name) {
-        this.FULL_name = FULL_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getFirstName() {
@@ -103,11 +105,11 @@ public class User_Info implements Serializable {
         this.gender = gender;
     }
 
-    public String getMaritalStatus() {
+    public Boolean getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(String maritalStatus) {
+    public void setMaritalStatus(Boolean maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 
@@ -117,6 +119,14 @@ public class User_Info implements Serializable {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getPhone() {
@@ -164,15 +174,18 @@ public class User_Info implements Serializable {
         return "User_Info{" +
                 "user_uid=" + user_uid +
                 ", userid=" + userid +
-                ", FULL_name='" + FULL_name + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", maritalStatus='" + maritalStatus + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
+                ", occupation='" + occupation + '\'' +
                 ", phone='" + phone + '\'' +
                 ", alternatePhone='" + alternatePhone + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
+                ", createdDate=" + createdDate +
+                ", modifiedDate=" + modifiedDate +
                 '}';
     }
 }

@@ -8,6 +8,7 @@
 <body>
     <h1>Services</h1>
     <a href='views/userregistration.jsp'>Signup</a>
-
+    <br/>
+    <label> <a href="userregister">Register</a> </label>
 </body>
 </html>
