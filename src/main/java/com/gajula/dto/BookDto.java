@@ -10,12 +10,12 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "BOOK", schema = "book_services")
+@Table(name = "BOOK", schema = "gajula_services")
 public class BookDto implements Serializable {
 
     @Id
     @GeneratedValue(generator = "bookid_seq_id", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "bookid_seq_id", sequenceName = "bookid_seq", allocationSize = 1, schema = "book_services")
+    @SequenceGenerator(name = "bookid_seq_id", sequenceName = "bookid_seq", allocationSize = 1, schema = "gajula_services")
     @Column(name = "BOOK_ID")
     private BigInteger book_id;
     @Column(name = "TITLE")

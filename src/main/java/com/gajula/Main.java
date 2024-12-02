@@ -19,6 +19,7 @@ public class Main {
 	public static void main(String[] args) throws Exception{
 		try{
 			admin.info("Spring Boot Main Start");
+			System.setProperty("spring.devtools.restart.enabled", "false");
 			SpringApplication.run(Main.class, args);
 			admin.info("Spring Boot Main End");
 		}catch (Exception e){

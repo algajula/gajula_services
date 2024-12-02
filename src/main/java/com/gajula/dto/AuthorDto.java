@@ -7,12 +7,12 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "AUTHOR", schema = "book_services")
+@Table(name = "AUTHOR", schema = "gajula_services")
 public class AuthorDto {
 
     @Id
     @GeneratedValue(generator = "authorid_seq_id", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "authorid_seq_id", sequenceName = "authorid_seq", allocationSize = 1, schema = "book_services")
+    @SequenceGenerator(name = "authorid_seq_id", sequenceName = "authorid_seq", allocationSize = 1, schema = "gajula_services")
     @Column(name = "AUTHOR_ID")
     private BigInteger author_id;
 

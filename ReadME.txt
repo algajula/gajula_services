@@ -18,5 +18,5 @@ static resources: bydefault  ==  classpath:/resources/static/css ( |js|images|tx
 ViewResolver: Jstl view  == gajula/views/.jsp
 
 db tables:
-SELECT * FROM BOOK_SERVICES.BOOK;
-SELECT * FROM BOOK_SERVICES.AUTHOR;
+SELECT * FROM GAJULA_SERVICES.BOOK;
+SELECT * FROM GAJULA_SERVICES.AUTHOR;

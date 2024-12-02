@@ -3,7 +3,7 @@ package com.gajula.listener;
 import com.gajula.dto.Address_Info;
 import com.gajula.dto.User_Info;
 import com.gajula.model.ResponseBean;
-import com.gajula.service.TrainService;
+import com.gajula.service.CustomerService;
 import com.gajula.service.UserService;
 import com.gajula.util.APIConstants;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +30,7 @@ public class GajulaKafkaListener {
 	private String addressErrorTopic;
 
     @Autowired
-    TrainService trainService;
+	CustomerService customerService;
 
 	@Autowired
 	UserService userService;

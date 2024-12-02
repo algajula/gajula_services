@@ -10,18 +10,20 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "ADDRESS_INFO", schema = "book_services")
+@Table(name = "ADDRESS_INFO", schema = "gajula_services")
 public class Address_Info implements Serializable {
 
     @Id
     @GeneratedValue(generator = "addruid_seq_id", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "addruid_seq_id", sequenceName = "addruid_seq_id", allocationSize = 1, schema = "book_services")
+    @SequenceGenerator(name = "addruid_seq_id", sequenceName = "addruid_seq_id", allocationSize = 1, schema = "gajula_services")
     @Column(name = "ADDR_UID")
     private BigInteger addr_uid;
 
     @Column(name = "USERID")
     private BigInteger userid;
 
+    @Column(name = "ADDRESS_TYPE")
+    private String addressType;
     @Column(name = "FLAT")
     private String flat;
     @Column(name = "STREET")
@@ -68,6 +70,14 @@ public class Address_Info implements Serializable {
 
     public void setUserid(BigInteger userid) {
         this.userid = userid;
+    }
+
+    public String getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(String addressType) {
+        this.addressType = addressType;
     }
 
     public String getFlat() {
@@ -163,6 +173,7 @@ public class Address_Info implements Serializable {
         return "Address_Info{" +
                 "addr_uid=" + addr_uid +
                 ", userid=" + userid +
+                ", addressType=" + addressType +
                 ", flat='" + flat + '\'' +
                 ", street='" + street + '\'' +
                 ", area='" + area + '\'' +
