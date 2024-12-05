@@ -1,6 +1,6 @@
 package com.gajula.validator;
 
-import com.gajula.dto.User_Info;
+import com.gajula.dto.UserDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -15,13 +15,13 @@ public class UserFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> user) {
-        return User_Info.class.equals(user);
+        return UserDto.class.equals(user);
     }
 
     @Override
     public void validate(Object userObj, Errors errors) {
         admin.info("User Form Validation start");
-        User_Info user = (User_Info) userObj;
+        UserDto user = (UserDto) userObj;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fullName", "error.fullname");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "error.phone");
         if(user.getPhone().length() < 10){

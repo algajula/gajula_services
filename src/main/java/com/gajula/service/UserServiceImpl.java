@@ -1,7 +1,7 @@
 package com.gajula.service;
 
-import com.gajula.dto.Address_Info;
-import com.gajula.dto.User_Info;
+import com.gajula.dto.AddressDto;
+import com.gajula.dto.UserDto;
 import com.gajula.model.ResponseBean;
 import com.gajula.repository.AddressRepository;
 import com.gajula.repository.UserRepository;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public ResponseBean getAllUsers() throws Exception {
         ResponseBean response = new ResponseBean();
-        List<User_Info> list = new ArrayList<User_Info>();
+        List<UserDto> list = new ArrayList<UserDto>();
         try {
             admin.info("getAllUsers start ");
             list = userRepository.findAll();
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public ResponseBean getUserByUserid(String userid) throws Exception {
         ResponseBean response = new ResponseBean();
-        List<User_Info> list = new ArrayList<User_Info>();
+        List<UserDto> list = new ArrayList<UserDto>();
         try {
             admin.info("getUserByUserid start ");
             list = userRepository.getUserByUserid(userid);
@@ -59,12 +59,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean saveUserInfo(User_Info user) throws Exception {
+    public boolean saveUserInfo(UserDto user) throws Exception {
         boolean updateFlag = false;
-        User_Info userinfo = new User_Info();
+        UserDto userinfo = new UserDto();
         try {
             admin.info("saveUserInfo start ");
-            userinfo = (User_Info)userRepository.save(user);
+            userinfo = (UserDto)userRepository.save(user);
             updateFlag = true;
             admin.info("saveUserInfo end");
         } catch (Exception e) {
@@ -74,11 +74,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean saveAddressInfo(Address_Info addressInfo) throws Exception {
+    public boolean saveAddressInfo(AddressDto addressInfo) throws Exception {
         boolean updateFlag = false;
         try {
             admin.info("saveAddressInfo start ");
-            addressInfo = (Address_Info)addressRepository.save(addressInfo);
+            addressInfo = (AddressDto)addressRepository.save(addressInfo);
             updateFlag = true;
             admin.info("saveAddressInfo end");
         } catch (Exception e) {

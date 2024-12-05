@@ -1,6 +1,6 @@
 package com.gajula.repository;
 
-import com.gajula.dto.UserDto;
+import com.gajula.dto.CountryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<UserDto, BigInteger> {
+public interface CountryRepository extends JpaRepository<CountryDto, BigInteger> {
 
-    @Query(value = "SELECT b FROM UserDto b WHERE b.userId = :userId")
-    public List<UserDto> getUserByUserid(String userId);
+    @Query(value = "SELECT b FROM CountryDto b WHERE b.countryCode = :countryCode")
+    public List<CountryDto> getCountryByCountryCode(BigInteger countryCode);
 
 }

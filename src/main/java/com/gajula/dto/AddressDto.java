@@ -11,16 +11,16 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ADDRESS_INFO", schema = "gajula_services")
-public class Address_Info implements Serializable {
+public class AddressDto implements Serializable {
 
     @Id
     @GeneratedValue(generator = "addruid_seq_id", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "addruid_seq_id", sequenceName = "addruid_seq_id", allocationSize = 1, schema = "gajula_services")
     @Column(name = "ADDR_UID")
-    private BigInteger addr_uid;
+    private BigInteger addrUid;
 
     @Column(name = "USERID")
-    private BigInteger userid;
+    private BigInteger userId;
 
     @Column(name = "ADDRESS_TYPE")
     private String addressType;
@@ -56,20 +56,20 @@ public class Address_Info implements Serializable {
     @LastModifiedDate
     private Date modifiedDate;
 
-    public BigInteger getAddr_uid() {
-        return addr_uid;
+    public BigInteger getAddrUid() {
+        return addrUid;
     }
 
-    public void setAddr_uid(BigInteger addr_uid) {
-        this.addr_uid = addr_uid;
+    public void setAddrUid(BigInteger addrUid) {
+        this.addrUid = addrUid;
     }
 
-    public BigInteger getUserid() {
-        return userid;
+    public BigInteger getUserId() {
+        return userId;
     }
 
-    public void setUserid(BigInteger userid) {
-        this.userid = userid;
+    public void setUserId(BigInteger userId) {
+        this.userId = userId;
     }
 
     public String getAddressType() {
@@ -170,9 +170,9 @@ public class Address_Info implements Serializable {
 
     @Override
     public String toString() {
-        return "Address_Info{" +
-                "addr_uid=" + addr_uid +
-                ", userid=" + userid +
+        return "AddressDto{" +
+                "addrUid=" + addrUid +
+                ", userId=" + userId +
                 ", addressType=" + addressType +
                 ", flat='" + flat + '\'' +
                 ", street='" + street + '\'' +

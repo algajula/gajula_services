@@ -1,6 +1,6 @@
 package com.gajula.controller;
 
-import com.gajula.dto.User_Info;
+import com.gajula.dto.UserDto;
 import com.gajula.exception.CustomException;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.UserService;
@@ -69,7 +69,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String userregister(Model model) throws Exception{
-        User_Info user = new User_Info();
+        UserDto user = new UserDto();
         try{
             admin.info("userregister start");
             user.setFullName("Gajula Allabakash");
@@ -84,7 +84,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String submitForm(@Valid @ModelAttribute("user") User_Info user,
+    public String submitForm(@Valid @ModelAttribute("user") UserDto user,
                              BindingResult bindingResult, Model model) {
         admin.info("Professing form...");
         admin.info(user);

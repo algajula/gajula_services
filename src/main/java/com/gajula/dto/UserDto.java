@@ -11,16 +11,16 @@ import java.util.Date;
 
 @Entity
 @Table(name = "USER_INFO", schema = "gajula_services")
-public class User_Info implements Serializable {
+public class UserDto implements Serializable {
 
     @Id
     @GeneratedValue(generator = "userid_seq_id", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "userid_seq_id", sequenceName = "userid_seq", allocationSize = 1, schema = "gajula_services")
     @Column(name = "USER_UID")
-    private BigInteger user_uid;
+    private BigInteger userUid;
 
     @Column(name = "USERID")
-    private BigInteger userid;
+    private BigInteger userId;
     @Column(name = "FULL_NAME")
     private String fullName;
     @Column(name = "FIRST_NAME")
@@ -57,20 +57,20 @@ public class User_Info implements Serializable {
     @LastModifiedDate
     private Date modifiedDate;
 
-    public BigInteger getUser_uid() {
-        return user_uid;
+    public BigInteger getUserUid() {
+        return userUid;
     }
 
-    public void setUser_uid(BigInteger user_uid) {
-        this.user_uid = user_uid;
+    public void setUserUid(BigInteger userUid) {
+        this.userUid = userUid;
     }
 
-    public BigInteger getUserid() {
-        return userid;
+    public BigInteger getUserId() {
+        return userId;
     }
 
-    public void setUserid(BigInteger userid) {
-        this.userid = userid;
+    public void setUserId(BigInteger userId) {
+        this.userId = userId;
     }
 
     public String getFullName() {
@@ -171,9 +171,9 @@ public class User_Info implements Serializable {
 
     @Override
     public String toString() {
-        return "User_Info{" +
-                "user_uid=" + user_uid +
-                ", userid=" + userid +
+        return "UserDto{" +
+                "userUid=" + userUid +
+                ", userId=" + userId +
                 ", fullName='" + fullName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

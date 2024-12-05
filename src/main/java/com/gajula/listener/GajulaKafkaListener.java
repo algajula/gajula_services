@@ -1,7 +1,7 @@
 package com.gajula.listener;
 
-import com.gajula.dto.Address_Info;
-import com.gajula.dto.User_Info;
+import com.gajula.dto.AddressDto;
+import com.gajula.dto.UserDto;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.CustomerService;
 import com.gajula.service.UserService;
@@ -43,9 +43,9 @@ public class GajulaKafkaListener {
 		admin.info(String.format("$$$$ =>USERINFO Consumed message: " + payload));
 		try{
 			admin.info("process USERINFO start");
-			User_Info userinfo = APIConstants.convertrequestToUserDto(payload);
+			UserDto userinfo = APIConstants.convertrequestToUserDto(payload);
 			ResponseBean response = new ResponseBean();
-			admin.info("UserID=======" + userinfo.getUserid());
+			admin.info("UserID=======" + userinfo.getUserId());
 			boolean updtedFlag = userService.saveUserInfo(userinfo);
 			if (updtedFlag) {
 				response.setStatusCode(APIConstants.STATUS_SUCCESS_CODE);
@@ -69,9 +69,9 @@ public class GajulaKafkaListener {
 		admin.info(String.format("$$$$ =>ADDRESS Consumed message: " + payload));
 		try{
 			admin.info("process ADDRESS start");
-			Address_Info addressinfo = APIConstants.convertrequestToAddressinfo(payload);
+			AddressDto addressinfo = APIConstants.convertrequestToAddressinfo(payload);
 			ResponseBean response = new ResponseBean();
-			admin.info("UserID=======" + addressinfo.getUserid());
+			admin.info("UserID=======" + addressinfo.getUserId());
 			boolean updtedFlag = userService.saveAddressInfo(addressinfo);
 			if (updtedFlag) {
 				response.setStatusCode(APIConstants.STATUS_SUCCESS_CODE);

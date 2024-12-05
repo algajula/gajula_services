@@ -1,8 +1,8 @@
 package com.gajula.util;
 
-import com.gajula.dto.Address_Info;
-import com.gajula.dto.UserPwd_Info;
-import com.gajula.dto.User_Info;
+import com.gajula.dto.AddressDto;
+import com.gajula.dto.UserDto;
+import com.gajula.dto.UserPwdDto;
 import com.gajula.model.RequestBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -43,10 +43,10 @@ public class APIConstants {
 		return request;
     }
 
-	public static User_Info convertrequestToUserDto(String payload){
-		User_Info userdto = new User_Info();
+	public static UserDto convertrequestToUserDto(String payload){
+		UserDto userdto = new UserDto();
 		try {
-			userdto = getObjectMapper().readValue(payload, User_Info.class);
+			userdto = getObjectMapper().readValue(payload, UserDto.class);
 		} catch (Exception e) {
 			admin.error("error while conversion to user info ===" + e.getMessage());
 			return userdto;
@@ -54,10 +54,10 @@ public class APIConstants {
 		return userdto;
 	}
 
-	public static UserPwd_Info convertrequestToUserPwdDto(String payload){
-		UserPwd_Info userpwddto = new UserPwd_Info();
+	public static UserPwdDto convertrequestToUserPwdDto(String payload){
+		UserPwdDto userpwddto = new UserPwdDto();
 		try {
-			userpwddto = getObjectMapper().readValue(payload, UserPwd_Info.class);
+			userpwddto = getObjectMapper().readValue(payload, UserPwdDto.class);
 		} catch (Exception e) {
 			admin.error("error while conversion to UserPwd info ===" + e.getMessage());
 			return userpwddto;
@@ -65,10 +65,10 @@ public class APIConstants {
 		return userpwddto;
 	}
 
-	public static Address_Info convertrequestToAddressinfo(String payload){
-		Address_Info addrinfo = new Address_Info();
+	public static AddressDto convertrequestToAddressinfo(String payload){
+		AddressDto addrinfo = new AddressDto();
 		try {
-			addrinfo = getObjectMapper().readValue(payload, Address_Info.class);
+			addrinfo = getObjectMapper().readValue(payload, AddressDto.class);
 		} catch (Exception e) {
 			admin.error("error while conversion to Address info ===" + e.getMessage());
 			return addrinfo;

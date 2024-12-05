@@ -11,22 +11,22 @@ import java.util.Date;
 
 @Entity
 @Table(name = "USERPWD_INFO", schema = "gajula_services")
-public class UserPwd_Info implements Serializable {
+public class UserPwdDto implements Serializable {
 
     @Id
     @GeneratedValue(generator = "userpwdid_seq_id", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "userpwdid_seq_id", sequenceName = "userpwdid_seq_id", allocationSize = 1, schema = "gajula_services")
     @Column(name = "USERPWD_UID")
-    private BigInteger userpwd_uid;
+    private BigInteger userpwdUid;
 
     @Column(name = "USERID")
-    private BigInteger userid;
+    private BigInteger userId;
     @Column(name = "FIRST_PWD")
-    private String first_pwd;
+    private String firstPwd;
     @Column(name = "SECOND_PWD")
-    private String second_pwd;
+    private String secondPwd;
     @Column(name = "THIRD_PWD")
-    private String third_pwd;
+    private String thirdPwd;
 
     @Column(name = "CREATED_DATE", columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -40,44 +40,44 @@ public class UserPwd_Info implements Serializable {
     @LastModifiedDate
     private Date modifiedDate;
 
-    public BigInteger getUserpwd_uid() {
-        return userpwd_uid;
+    public BigInteger getUserpwdUid() {
+        return userpwdUid;
     }
 
-    public void setUserpwd_uid(BigInteger userpwd_uid) {
-        this.userpwd_uid = userpwd_uid;
+    public void setUserpwdUid(BigInteger userpwdUid) {
+        this.userpwdUid = userpwdUid;
     }
 
-    public BigInteger getUserid() {
-        return userid;
+    public BigInteger getUserId() {
+        return userId;
     }
 
-    public void setUserid(BigInteger userid) {
-        this.userid = userid;
+    public void setUserId(BigInteger userId) {
+        this.userId = userId;
     }
 
-    public String getFirst_pwd() {
-        return first_pwd;
+    public String getFirstPwd() {
+        return firstPwd;
     }
 
-    public void setFirst_pwd(String first_pwd) {
-        this.first_pwd = first_pwd;
+    public void setFirstPwd(String firstPwd) {
+        this.firstPwd = firstPwd;
     }
 
-    public String getSecond_pwd() {
-        return second_pwd;
+    public String getSecondPwd() {
+        return secondPwd;
     }
 
-    public void setSecond_pwd(String second_pwd) {
-        this.second_pwd = second_pwd;
+    public void setSecondPwd(String secondPwd) {
+        this.secondPwd = secondPwd;
     }
 
-    public String getThird_pwd() {
-        return third_pwd;
+    public String getThirdPwd() {
+        return thirdPwd;
     }
 
-    public void setThird_pwd(String third_pwd) {
-        this.third_pwd = third_pwd;
+    public void setThirdPwd(String thirdPwd) {
+        this.thirdPwd = thirdPwd;
     }
 
     public Date getCreatedDate() {
@@ -98,12 +98,12 @@ public class UserPwd_Info implements Serializable {
 
     @Override
     public String toString() {
-        return "UserPwd_Info{" +
-                "userpwd_uid=" + userpwd_uid +
-                ", userid=" + userid +
-                ", first_pwd='" + first_pwd + '\'' +
-                ", second_pwd='" + second_pwd + '\'' +
-                ", third_pwd='" + third_pwd + '\'' +
+        return "UserPwdDto{" +
+                "userpwdUid=" + userpwdUid +
+                ", userId=" + userId +
+                ", firstPwd='" + firstPwd + '\'' +
+                ", secondPwd='" + secondPwd + '\'' +
+                ", thirdPwd='" + thirdPwd + '\'' +
                 ", createdDate=" + createdDate +
                 ", modifiedDate=" + modifiedDate +
                 '}';
