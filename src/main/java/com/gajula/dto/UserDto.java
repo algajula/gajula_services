@@ -1,6 +1,7 @@
 package com.gajula.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gajula.enums.Gender;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,7 +29,8 @@ public class UserDto implements Serializable {
     @Column(name = "LAST_NAME")
     private String lastName;
     @Column(name = "GENDER")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @Column(name = "MARITAL_STATUS")
     private Boolean maritalStatus;
     @Column(name = "DATE_OF_BIRTH", columnDefinition = "TIMESTAMP")
@@ -97,11 +99,11 @@ public class UserDto implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

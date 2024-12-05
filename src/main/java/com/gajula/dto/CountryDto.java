@@ -22,7 +22,7 @@ public class CountryDto implements Serializable {
     @Column(name = "REGION")
     private String region;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<StateDto> states;
 

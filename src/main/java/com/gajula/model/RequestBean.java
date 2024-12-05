@@ -10,6 +10,9 @@ public class RequestBean implements Serializable{
 	private String genre;
 	private String authorName;
 	private String bookName;
+	private String countryCode;
+	private String stateCode;
+	private String cityCode;
 
 	public String getGenre() {
 		return genre;
@@ -33,5 +36,29 @@ public class RequestBean implements Serializable{
 
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getStateCode() {
+		return stateCode;
+	}
+
+	public void setStateCode(String stateCode) {
+		this.stateCode = stateCode;
+	}
+
+	public String getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
 	}
 }
