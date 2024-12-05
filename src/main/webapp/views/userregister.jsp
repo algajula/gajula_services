@@ -7,35 +7,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>User Registration Form</title>
-<style type="text/css">
-	
-	button {
-		padding: 10px;
-	}
-	.error {
-		color: red;
-		font-style: italic;
-	}
-	form {
-		display: table;
-	}
-	form div {
-		display: table-row;
-	}
-	label, input, span, select {
-		display: table-cell;
-		margin: 5px;
-		text-align: left;		
-	}
-	input[type=text], input[type=password], select, textarea {
-		width: 200px;
-		margin: 5px;
-	}
-
-	form div div {
-		display: table-cell;
-	}	
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css" />
+<script>
+      var contextPath = "<%=request.getContextPath()%>";
+</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
 </head>
 <body>
 	<div align="center">
@@ -94,6 +71,10 @@
 				<div></div>
 			</div>
 		</form:form>
+	</div>
+
+	<div>
+	<button name="GetCountries" id="getcountries" class="getcountries" >GetCountries</button>
 	</div>
 </body>
 </html>

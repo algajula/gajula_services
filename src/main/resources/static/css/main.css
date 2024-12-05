@@ -1,3 +1,30 @@
 #h1:{
     background-color: yellow;
 }
+
+button {
+		padding: 10px;
+	}
+	.error {
+		color: red;
+		font-style: italic;
+	}
+	form {
+		display: table;
+	}
+	form div {
+		display: table-row;
+	}
+	label, input, span, select {
+		display: table-cell;
+		margin: 5px;
+		text-align: left;
+	}
+	input[type=text], input[type=password], select, textarea {
+		width: 200px;
+		margin: 5px;
+	}
+
+	form div div {
+		display: table-cell;
+	}
