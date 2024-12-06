@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>menu</title>
-</head>
-<body>
-<h1>menu</h1>
-</body>
-</html>
+<div class="menu">
+   <ul>
+     <li><a href="/customer">Customer</a></li>
+     <li><a href="#">Notifications</a></li>
+     <li><a href="#">Contact Us</a></li>
+   </ul>
+</div>

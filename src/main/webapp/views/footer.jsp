@@ -1,10 +1,2 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>footer</title>
-</head>
-<body>
-    <h1>footer</h1>
-</body>
-</html>
+<p align="center">Author: Gajula Organization<br>
+<a href="mailto:hege@example.com">algajula@gajula.com</a></p>
