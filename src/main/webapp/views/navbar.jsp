@@ -12,6 +12,7 @@
             <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
                 <a href="${pageContext.request.contextPath}/api/v1/user/register">Register</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Customer</a>
                 <a href="#deliver">Deliver</a>
                 <a href="#package">Package</a>
                 <a href="#express">Express</a>
