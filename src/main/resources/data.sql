@@ -147,3 +147,37 @@ INSERT INTO GAJULA_SERVICES.CITY (CITY_CODE, CITY_NAME, STATE_CODE) VALUES(3334,
 INSERT INTO GAJULA_SERVICES.CITY (CITY_CODE, CITY_NAME, STATE_CODE) VALUES(3335, 'Warangal', 2222);
 INSERT INTO GAJULA_SERVICES.CITY (CITY_CODE, CITY_NAME, STATE_CODE) VALUES(3336, 'Khammam', 2222);
 COMMIT;
+
+drop table if exists gajula_services.ADDRESS_INFO cascade;
+drop table if exists gajula_services.USER_INFO cascade;
+drop table if exists gajula_services.USERPWD_INFO cascade;
+COMMIT;
+
+drop sequence if exists gajula_services.addruid_seq_id;
+drop sequence if exists gajula_services.userid_seq;
+drop sequence if exists gajula_services.userpwdid_seq_id;
+COMMIT;
+
+create sequence gajula_services.addruid_seq_id start with 1 increment by 1;
+create sequence gajula_services.userid_seq start with 1 increment by 1;
+create sequence gajula_services.userpwdid_seq_id start with 1 increment by 1;
+COMMIT;
+
+create table gajula_services.ADDRESS_INFO
+ (ADDR_UID numeric(38,0) not null, USERID numeric(38,0), CREATED_DATE TIMESTAMP, MODIFIED_DATE TIMESTAMP,
+ ADDRESS_TYPE varchar(255), AREA varchar(255), CITY varchar(255), COUNTRY varchar(255), FLAT varchar(255),
+ STATE varchar(255), STREET varchar(255), TOWN varchar(255), ZIPCODE varchar(255), landmark varchar(255),
+primary key (ADDR_UID));
+
+create table gajula_services.USER_INFO
+ (MARITAL_STATUS boolean, USERID numeric(38,0), USER_UID numeric(38,0) not null, CREATED_DATE TIMESTAMP,
+ DATE_OF_BIRTH TIMESTAMP, MODIFIED_DATE TIMESTAMP, ALTERNATE_PHONE varchar(10),
+ PHONE varchar(10), EMAIL_ADDRESS varchar(255), FIRST_NAME varchar(255),
+ FULL_NAME varchar(255), LAST_NAME varchar(255), OCCUPATION varchar(255),
+GENDER enum ('FEMALE','MALE'), primary key (USER_UID));
+
+create table gajula_services.USERPWD_INFO
+ (USERID numeric(38,0), USERPWD_UID numeric(38,0) not null, CREATED_DATE TIMESTAMP,
+ MODIFIED_DATE TIMESTAMP, FIRST_PWD varchar(255), SECOND_PWD varchar(255),
+ THIRD_PWD varchar(255), primary key (USERPWD_UID));
+COMMIT;

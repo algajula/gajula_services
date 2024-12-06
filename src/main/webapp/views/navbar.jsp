@@ -1,30 +1,29 @@
 <div class="navbar">
         <a href="/index">Home</a>
         <div class="subnav">
-            <button class="subnavbtn">About <i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn">Book <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#company">Company</a>
-                <a href="#team">Team</a>
-                <a href="#careers">Careers</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/bookview">View Books</a>
+                <a href="${pageContext.request.contextPath}/api/v1/user/register">Add Book</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Edit Book</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Authors</a>
             </div>
         </div>
         <div class="subnav">
-            <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn">Customer <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="${pageContext.request.contextPath}/api/v1/user/register">Register</a>
-                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Customer</a>
-                <a href="#deliver">Deliver</a>
-                <a href="#package">Package</a>
-                <a href="#express">Express</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">View Customers</a>
+                <a href="${pageContext.request.contextPath}/api/v1/user/register">Add Customer</a>
+                <a href="${pageContext.request.contextPath}/api/v1/user/register">Edit Customer</a>
+                <a href="${pageContext.request.contextPath}/api/v1/user/register">Vehicles</a>
             </div>
         </div>
         <div class="subnav">
-            <button class="subnavbtn">Partners <i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn">Users <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#link1">Link 1</a>
-                <a href="#link2">Link 2</a>
-                <a href="#link3">Link 3</a>
-                <a href="#link4">Link 4</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/userview">View Users</a>
+                <a href="${pageContext.request.contextPath}/api/v1/user/register">Add User</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Edit User</a>
             </div>
         </div>
         <a href="#contact">Contact</a>
