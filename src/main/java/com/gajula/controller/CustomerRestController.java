@@ -49,11 +49,13 @@ public class CustomerRestController {
 		return response;
 	}
 
-	@PostMapping(value = "/saveCustomer", produces = "application/json", consumes = "application/json")
-	public ResponseBean saveCustomer(@RequestBody(required = true) CustomerDto customer,
-			HttpServletRequest request) throws Exception {
+	@PostMapping(value = "/saveCustomer/{actionType}", produces = "application/json", consumes = "application/json")
+	public ResponseBean saveCustomer(@PathVariable("actionType") String actionType,
+				@RequestBody(required = true) String reqStr) throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
+			admin.info("saveCustomer start actionType==="+actionType);
+			CustomerDto customer = APIConstants.getObjectMapper().readValue(reqStr,CustomerDto.class);
 			admin.info("request=======" + customer.getCreatedDate());
 			boolean updtedFlag = customerService.saveCustomerDetails(customer);
 			if (updtedFlag) {

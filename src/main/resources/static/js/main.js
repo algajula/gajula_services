@@ -1,4 +1,4 @@
 $(document).ready(function () {
-    alert('java script main file '+contextPath);
+    //alert('java script main file '+contextPath);
 
 });

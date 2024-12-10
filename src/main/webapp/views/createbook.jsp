@@ -27,7 +27,28 @@ pageEncoding="ISO-8859-1"%>
         <div class="box">
             <label class="title01">Add Book:</label>
             <div align="center">
-
+                <table>
+                    <tr>
+                        <td><label><spring:message code="label.book.title"/></label></td>
+                        <td><input type="text" id="title" /></td>
+                    </tr>
+                    <tr>
+                        <td><label><spring:message code="label.book.genre"/></label></td>
+                        <td><input type="text" id="genre" /></td>
+                    </tr>
+                    <tr>
+                        <td><label><spring:message code="label.book.publishDate"/></label></td>
+                        <td><input type="text" id="publicationDate" /></td>
+                    </tr>
+                    <tr>
+                        <td><label><spring:message code="label.book.price"/></label></td>
+                        <td><input type="text" id="price" /></td>
+                    </tr>
+                    <tr>
+                        <td><button name="savebook" id="savebook" class="savebook"><spring:message code="action.save"/></button></td>
+                        <td><button name="cancel" id="cancel" class="cancel"><spring:message code="action.cancel"/></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

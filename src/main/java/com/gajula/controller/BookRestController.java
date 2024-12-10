@@ -4,6 +4,7 @@ import com.gajula.dto.BookDto;
 import com.gajula.exception.CustomException;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.BookService;
+import com.gajula.util.APIConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,12 @@ public class BookRestController {
 
 	@PostMapping(value = "/saveBook/{actionType}", produces = "application/json", consumes = "application/json")
 	public ResponseBean saveBook(@PathVariable("actionType") String actionType,
-								 @RequestBody(required = true) BookDto book) throws Exception {
+								 @RequestBody(required = true) String reqStr) throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
 			admin.info("===saveBook START===");
-			if(actionType.equalsIgnoreCase("new")){
+			BookDto book = APIConstants.getObjectMapper().readValue(reqStr, BookDto.class);
+			if(actionType.equalsIgnoreCase("save")){
 				response = bookService.addNewBook(book);
 			}else if(actionType.equalsIgnoreCase("update")){
 				response = bookService.updateExistingBook(book);

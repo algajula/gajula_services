@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    alert('user service '+contextPath);
+    //alert('user service '+contextPath);
 
     $('#getcountries').click(function() {
                alert('get customer');
