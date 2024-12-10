@@ -67,26 +67,11 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/register")
-    public String userregister(Model model) throws Exception{
-        UserDto user = new UserDto();
-        try{
-            admin.info("userregister start");
-            user.setFullName("Gajula Allabakash");
-            model.addAttribute("user", user);
-            List<String> professionList = Arrays.asList("Developer", "Designer", "Tester", "Architect");
-            model.addAttribute("professionList", professionList);
-            admin.info("userregister end");
-        }catch (Exception e){
-            admin.error("userregister error "+e.getMessage());
-        }
-        return "userregister";
-    }
 
-    @PostMapping("/register")
-    public String submitForm(@Valid @ModelAttribute("user") UserDto user,
+    @PostMapping("/saveuser")
+    public String saveuser(@Valid @ModelAttribute("user") UserDto user,
                              BindingResult bindingResult, Model model) {
-        admin.info("Professing form...");
+        admin.info("====saveuser form====");
         admin.info(user);
         userFormValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {

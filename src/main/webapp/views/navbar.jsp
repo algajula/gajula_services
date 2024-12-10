@@ -4,26 +4,23 @@
             <button class="subnavbtn">Book <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
                 <a href="${pageContext.request.contextPath}/api/v1/templates/bookview">View Books</a>
-                <a href="${pageContext.request.contextPath}/api/v1/user/register">Add Book</a>
-                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Edit Book</a>
-                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Authors</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/createbook/new">Add Book</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/authorview">Authors</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn">Customer <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
                 <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">View Customers</a>
-                <a href="${pageContext.request.contextPath}/api/v1/user/register">Add Customer</a>
-                <a href="${pageContext.request.contextPath}/api/v1/user/register">Edit Customer</a>
-                <a href="${pageContext.request.contextPath}/api/v1/user/register">Vehicles</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/createcustomer/new">Add Customer</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/vehicleView">Vehicles</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn">Users <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
                 <a href="${pageContext.request.contextPath}/api/v1/templates/userview">View Users</a>
-                <a href="${pageContext.request.contextPath}/api/v1/user/register">Add User</a>
-                <a href="${pageContext.request.contextPath}/api/v1/templates/customerview">Edit User</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/createuser/new">Add User</a>
             </div>
         </div>
         <a href="#contact">Contact</a>

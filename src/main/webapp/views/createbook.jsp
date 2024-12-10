@@ -25,32 +25,9 @@ pageEncoding="ISO-8859-1"%>
     </header>
     <div class="container">
         <div class="box">
-            <label class="title01">Book Details:</label>
+            <label class="title01">Add Book:</label>
             <div align="center">
-                <c:if test="${!empty bookList}">
-                	<table class="tg">
-                	<tr>
-                		<th width="80">BookId</th>
-                		<th width="120">Title</th>
-                		<th width="120">genre</th>
-                		<th width="120">Publish Date</th>
-                		<th width="120">Price</th>
-                		<th width="60">Edit</th>
-                		<th width="60">Delete</th>
-                	</tr>
-                	<c:forEach items="${bookList}" var="book">
-                		<tr>
-                			<td>${book.book_id}</td>
-                			<td>${book.title}</td>
-                			<td>${book.genre}</td>
-                			<td>${book.publicationDate}</td>
-                			<td>${book.price}</td>
-                			<td><a href="<c:url value='/api/v1/templates/createbook/edit?bookId=${book.book_id}' />" >Edit</a></td>
-                			<td><a href="<c:url value='/remove/${book.book_id}' />" >Delete</a></td>
-                		</tr>
-                	</c:forEach>
-                	</table>
-                </c:if>
+
             </div>
         </div>
     </div>

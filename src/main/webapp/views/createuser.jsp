@@ -27,7 +27,7 @@
         <div class="box">
             <div align="center">
             		<h2>User Registration</h2>
-            		<form:form action="${pageContext.request.contextPath}/api/v1/user/register" method="post" modelAttribute="user">
+            		<form:form action="${pageContext.request.contextPath}/api/v1/user/saveuser" method="post" modelAttribute="user">
             			<div>
             			<form:label path="fullName"><spring:message code="label.fullname"/>:</form:label>
             			<form:input path="fullName" />
