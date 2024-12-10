@@ -15,7 +15,7 @@ pageEncoding="ISO-8859-1"%>
         var contextPath = "<%=request.getContextPath()%>";
     </script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bookservice.js"></script>
 </head>
 <body>
 <body>

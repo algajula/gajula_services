@@ -75,10 +75,12 @@ public class UserController {
         admin.info(user);
         userFormValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
+            admin.info("In validation check");
             List<String> professionList = Arrays.asList("Developer", "Designer", "Tester", "Architect");
             model.addAttribute("professionList", professionList);
-            return "userregister";
+            return "createuser";
         }
+        admin.info("====saveuser form save end ====");
         return "registersuccess";
     }
 
