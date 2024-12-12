@@ -7,6 +7,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AwsS3ServiceImpl implements AwsS3Service{
@@ -18,8 +23,21 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     @Override
     public ResponseBean getListfromS3Bucket(String bucketName) throws Exception {
         ResponseBean response = new ResponseBean();
+        List<String> keys = new ArrayList<>();
         try {
-            admin.info("AWS S3 getListfromS3Bucket Start");
+            admin.info("AWS S3 getListfromS3Bucket Start "+bucketName);
+            ListObjectsV2Request s3req = ListObjectsV2Request.builder()
+                    .bucket(bucketName)
+                    //.prefix("*")
+                    .build();
+            ListObjectsV2Iterable s3res = s3Client.listObjectsV2Paginator(s3req);
+            for (ListObjectsV2Response page : s3res) {
+                page.contents().forEach((S3Object object) -> {
+                    System.out.println(object.key());
+                });
+            }
+            admin.info("Files found in bucket({}): {}", bucketName, keys);
+            response.setResult(keys);
             admin.info("AWS S3 getListfromS3Bucket End");
         }catch (Exception e){
             admin.error("AWS S3 getListfromS3Bucket error "+e.getMessage());

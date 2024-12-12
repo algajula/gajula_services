@@ -23,7 +23,7 @@ public class AWSResourcesConfiguration {
             admin.info("AWS S3 Configuration Start");
             s3Client = S3Client.builder()
                     .credentialsProvider(new GajulaAwsCredentialsProvider())
-                    .region(Region.AP_SOUTH_1)
+                    .region(Region.US_EAST_1)
                     .build();
             admin.info("AWS S3 Configuration End");
         } catch (Exception e) {
