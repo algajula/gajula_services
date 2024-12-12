@@ -8,9 +8,9 @@ import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 @Component
 public class GajulaAwsCredentialsProvider implements AwsCredentialsProvider {
 
-    @Value("${gajula.s3.username}")
+    @Value("${gajula.aws.username}")
     private String accessKey;
-    @Value("${gajula.s3.password}")
+    @Value("${gajula.aws.password}")
     private String accessSecret;
 
     @Override
