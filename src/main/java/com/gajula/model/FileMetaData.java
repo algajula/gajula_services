@@ -1,6 +1,8 @@
 package com.gajula.model;
 
+import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 
 public class FileMetaData implements Serializable {
@@ -10,7 +12,10 @@ public class FileMetaData implements Serializable {
     private String keyType;
     private Long contentLength;
     private String contentType;
-    private InputStream value;
+    private OutputStream value;
+    private InputStream fileIn;
+    private OutputStream fileOut;
+    private File file;
 
     public String getBucketName() {
         return bucketName;
@@ -52,12 +57,36 @@ public class FileMetaData implements Serializable {
         this.contentType = contentType;
     }
 
-    public InputStream getValue() {
+    public OutputStream getValue() {
         return value;
     }
 
-    public void setValue(InputStream value) {
+    public void setValue(OutputStream value) {
         this.value = value;
+    }
+
+    public InputStream getFileIn() {
+        return fileIn;
+    }
+
+    public void setFileIn(InputStream fileIn) {
+        this.fileIn = fileIn;
+    }
+
+    public OutputStream getFileOut() {
+        return fileOut;
+    }
+
+    public void setFileOut(OutputStream fileOut) {
+        this.fileOut = fileOut;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     @Override
@@ -69,6 +98,9 @@ public class FileMetaData implements Serializable {
                 ", contentLength=" + contentLength +
                 ", contentType='" + contentType + '\'' +
                 ", value=" + value +
+                ", fileIn=" + fileIn +
+                ", fileOut=" + fileOut +
+                ", file=" + file +
                 '}';
     }
 }

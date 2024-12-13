@@ -7,6 +7,7 @@ import com.gajula.model.RequestBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.util.StringUtils;
 
 public class APIConstants {
 
@@ -76,4 +77,17 @@ public class APIConstants {
 		return addrinfo;
 	}
 
+	public static String getFileExtension(String fileName) {
+		if (StringUtils.isEmpty(fileName) || !fileName.contains(".") || fileName.endsWith("."))
+			return null;
+		else
+			return fileName.substring(fileName.lastIndexOf(".") + 1);
+	}
+
+	public static String getBaseFileName(String fileName) {
+		if (StringUtils.isEmpty(fileName) || !fileName.contains(".") || fileName.endsWith("."))
+			return null;
+		else
+			return fileName.substring(0,fileName.lastIndexOf("."));
+	}
 }

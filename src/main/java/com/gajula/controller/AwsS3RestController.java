@@ -6,11 +6,19 @@ import com.gajula.model.RequestBean;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.AwsS3Service;
 import com.gajula.util.APIConstants;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 @RestController
 @RequestMapping("/api/v1/aws/s3/")
@@ -28,7 +36,7 @@ public class AwsS3RestController {
             admin.info("===lists3files START===");
             RequestBean request  = APIConstants.getObjectMapper().readValue(reqStr, RequestBean.class);
             admin.info("Request Json==="+reqStr);
-            awsS3Service.getListfromS3Bucket(request.getBucketName());
+            response = awsS3Service.getListfromS3Bucket(request.getBucketName());
             admin.info("===lists3files END===");
         } catch (Exception e) {
             throw new CustomException("error occured in lists3files service" + e.getMessage());
@@ -53,19 +61,30 @@ public class AwsS3RestController {
     }
 
     @GetMapping(value = "/downloads3file", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseBean downloadFileFromS3Bucket(@RequestBody(required = true) String reqStr) throws Exception {
-        ResponseBean response = new ResponseBean();
+    public void downloadFileFromS3Bucket(@RequestBody(required = true) String reqStr,
+          HttpServletRequest httpReq, HttpServletResponse httpRes) throws Exception {
+        FileMetaData response = new FileMetaData();
         try {
             admin.info("===downloadFileFromS3Bucket START===");
             RequestBean request  = APIConstants.getObjectMapper().readValue(reqStr, RequestBean.class);
             admin.info("Request Json==="+reqStr);
-            FileMetaData metadata = new FileMetaData();
-            awsS3Service.downloadFileFromS3Bucket(request.getBucketName(), metadata);
+            response = awsS3Service.downloadFileFromS3Bucket(request);
+
+            httpRes.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+request.getFileName()+"."+request.getFileType());
+            //httpRes.addHeader(HttpHeaders.CONTENT_LENGTH, response.getContentLength());
+            httpRes.addHeader(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
+            httpRes.addHeader(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+            httpRes.addHeader(HttpHeaders.PRAGMA, "no-cache");
+            httpRes.addHeader(HttpHeaders.EXPIRES, "0");
+            httpRes.setContentType("application/octet-stream");
+            response.setContentLength(response.getContentLength());
+
+            InputStream inputStream = new BufferedInputStream(new FileInputStream(response.getFile()));
+            FileCopyUtils.copy(inputStream, httpRes.getOutputStream());
             admin.info("===downloadFileFromS3Bucket END===");
         } catch (Exception e) {
             throw new CustomException("error occured in downloadFileFromS3Bucket service" + e.getMessage());
         }
-        return response;
     }
 
 }
