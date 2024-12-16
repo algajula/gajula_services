@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/aws/s3/")
@@ -36,7 +37,8 @@ public class AwsS3RestController {
             admin.info("===lists3files START===");
             RequestBean request  = APIConstants.getObjectMapper().readValue(reqStr, RequestBean.class);
             admin.info("Request Json==="+reqStr);
-            response = awsS3Service.getListfromS3Bucket(request.getBucketName());
+            List<FileMetaData> s3files = awsS3Service.getListfromS3Bucket(request.getBucketName());
+            response.setResult(s3files);
             admin.info("===lists3files END===");
         } catch (Exception e) {
             throw new CustomException("error occured in lists3files service" + e.getMessage());
@@ -44,15 +46,12 @@ public class AwsS3RestController {
         return response;
     }
 
-    @GetMapping(value = "/uploads3file", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseBean UploadFileIntoS3Bucket(@RequestBody(required = true) String reqStr) throws Exception {
+    @PostMapping(value = "/uploads3file")
+    public ResponseBean UploadFileIntoS3Bucket(@RequestBody(required = true) FileMetaData metaData) throws Exception {
         ResponseBean response = new ResponseBean();
         try {
             admin.info("===UploadFileIntoS3Bucket START===");
-            RequestBean request  = APIConstants.getObjectMapper().readValue(reqStr, RequestBean.class);
-            admin.info("Request Json==="+reqStr);
-            FileMetaData metadata = new FileMetaData();
-            awsS3Service.UploadFileIntoS3Bucket(request.getBucketName(), metadata);
+            response = awsS3Service.UploadFileIntoS3Bucket(metaData.getBucketName(), metaData);
             admin.info("===UploadFileIntoS3Bucket END===");
         } catch (Exception e) {
             throw new CustomException("error occured in UploadFileIntoS3Bucket service" + e.getMessage());
@@ -60,14 +59,31 @@ public class AwsS3RestController {
         return response;
     }
 
-    @GetMapping(value = "/downloads3file", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void downloadFileFromS3Bucket(@RequestBody(required = true) String reqStr,
-          HttpServletRequest httpReq, HttpServletResponse httpRes) throws Exception {
+    @GetMapping(value = "/downloads3file")
+    public void downloadFileFromS3Bucket(
+            //@RequestBody(required = true) String reqStr,
+            @RequestParam("bucketName")String bucketName,
+            @RequestParam("fileName")String fileName,
+            @RequestParam("fileType")String fileType,
+            HttpServletRequest httpReq, HttpServletResponse httpRes) throws Exception {
         FileMetaData response = new FileMetaData();
         try {
             admin.info("===downloadFileFromS3Bucket START===");
-            RequestBean request  = APIConstants.getObjectMapper().readValue(reqStr, RequestBean.class);
+
+            //String bucketName = httpReq.getParameter("bucketName");
+            //String fileName = httpReq.getParameter("fileName");
+            //String fileType = httpReq.getParameter("fileType");
+
+            //RequestBean request  = APIConstants.getObjectMapper().readValue(reqStr, RequestBean.class);
+            //admin.info("Request Json==="+reqStr);
+
+            RequestBean request= new RequestBean();
+            request.setBucketName(bucketName);
+            request.setFileName(fileName);
+            request.setFileType(fileType);
+            String reqStr  = APIConstants.getObjectMapper().writeValueAsString(request);
             admin.info("Request Json==="+reqStr);
+
             response = awsS3Service.downloadFileFromS3Bucket(request);
 
             httpRes.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+request.getFileName()+"."+request.getFileType());

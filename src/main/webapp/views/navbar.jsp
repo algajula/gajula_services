@@ -23,5 +23,12 @@
                 <a href="${pageContext.request.contextPath}/api/v1/templates/createuser/new">Add User</a>
             </div>
         </div>
+        <div class="subnav">
+            <button class="subnavbtn">AWS S3 <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                <a href="${pageContext.request.contextPath}/api/v1/templates/s3fileview/all">S3 Files</a>
+                <a href="${pageContext.request.contextPath}/api/v1/templates/s3fileupload">Upload File</a>
+            </div>
+        </div>
         <a href="${pageContext.request.contextPath}/">Contact</a>
 </div>

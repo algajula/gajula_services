@@ -3,6 +3,7 @@ package com.gajula.service;
 import com.gajula.model.FileMetaData;
 import com.gajula.model.RequestBean;
 import com.gajula.model.ResponseBean;
+import com.gajula.util.APIConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     S3Client s3Client;
 
     @Override
-    public ResponseBean getListfromS3Bucket(String bucketName) throws Exception {
-        ResponseBean response = new ResponseBean();
+    public List<FileMetaData> getListfromS3Bucket(String bucketName) throws Exception {
+        List<FileMetaData> s3files = new ArrayList<FileMetaData>();
         List<String> keys = new ArrayList<>();
         try {
             admin.info("AWS S3 getListfromS3Bucket Start "+bucketName);
@@ -39,16 +40,23 @@ public class AwsS3ServiceImpl implements AwsS3Service{
             for (ListObjectsV2Response page : s3res) {
                 page.contents().forEach((S3Object object) -> {
                     System.out.println(object);
-                    keys.add(object.key());
+                    FileMetaData metaData = new FileMetaData();
+                    metaData.setBucketName(bucketName);
+                    String fileName = APIConstants.getBaseFileName(object.key());
+                    String fileType = APIConstants.getFileExtension(object.key());
+                    metaData.setKeyName(fileName);
+                    metaData.setKeyType(fileType);
+                    s3files.add(metaData);
+                    //keys.add(object.key());
                 });
             }
             admin.info("Files found in bucket({}): {}", bucketName, keys);
-            response.setResult(keys);
             admin.info("AWS S3 getListfromS3Bucket End");
+            return s3files;
         }catch (Exception e){
             admin.error("AWS S3 getListfromS3Bucket error "+e.getMessage());
         }
-        return response;
+        return s3files;
     }
 
     @Override

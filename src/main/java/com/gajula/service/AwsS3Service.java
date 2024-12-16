@@ -4,9 +4,11 @@ import com.gajula.model.FileMetaData;
 import com.gajula.model.RequestBean;
 import com.gajula.model.ResponseBean;
 
+import java.util.List;
+
 public interface AwsS3Service {
 
-    public ResponseBean getListfromS3Bucket(String bucketName) throws Exception;
+    public List<FileMetaData> getListfromS3Bucket(String bucketName) throws Exception;
     public ResponseBean UploadFileIntoS3Bucket(String bucketName, FileMetaData FileMetaData) throws Exception;
     public FileMetaData downloadFileFromS3Bucket(RequestBean request) throws Exception;
 

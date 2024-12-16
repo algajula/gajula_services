@@ -4,10 +4,12 @@ import com.gajula.dto.BookDto;
 import com.gajula.dto.CountryDto;
 import com.gajula.dto.CustomerDto;
 import com.gajula.dto.UserDto;
+import com.gajula.model.FileMetaData;
 import com.gajula.model.ResponseBean;
 import com.gajula.repository.BookRepository;
 import com.gajula.repository.CustomerRespository;
 import com.gajula.repository.UserRepository;
+import com.gajula.service.AwsS3Service;
 import com.gajula.service.CustomerService;
 import com.gajula.service.MasterService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +38,9 @@ public class TemplateController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    AwsS3Service awsS3Service;
 
     @Autowired
     CustomerRespository customerRespository;
@@ -146,6 +152,31 @@ public class TemplateController {
         }
         admin.info("=== create User End ===");
         return "createuser";
+    }
+
+    @RequestMapping("/s3fileview/{bucketName}")
+    public String s3fileview(@PathVariable("bucketName")String bucketName, Model model,
+                             HttpServletRequest httpReq) throws Exception{
+        admin.info("=== s3fileview Start ===");
+        admin.info("==== bucketName ===="+bucketName);
+
+        if(bucketName.equalsIgnoreCase("all"))
+            bucketName = "gajula-test";
+
+        List<FileMetaData> s3files = awsS3Service.getListfromS3Bucket(bucketName);
+        model.addAttribute("s3files", s3files);
+        admin.info("=== s3fileview End ===");
+        return "s3fileview";
+    }
+
+    @RequestMapping("/s3fileupload")
+    public String s3fileupload(Model model) throws Exception{
+        admin.info("=== s3fileupload Start ===");
+        FileMetaData metaData = new FileMetaData();
+        metaData.setBucketName("gajula-test");
+        model.addAttribute("metaData", metaData);
+        admin.info("=== s3fileupload End ===");
+        return "s3fileupload";
     }
 
 }
