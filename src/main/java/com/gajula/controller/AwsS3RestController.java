@@ -15,10 +15,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 
 @RestController
@@ -47,10 +49,18 @@ public class AwsS3RestController {
     }
 
     @PostMapping(value = "/uploads3file")
-    public ResponseBean UploadFileIntoS3Bucket(@RequestBody(required = true) FileMetaData metaData) throws Exception {
+    public ResponseBean UploadFileIntoS3Bucket(@RequestParam("file") MultipartFile s3file,
+           @RequestParam("bucketName") String bucketName) throws Exception {
         ResponseBean response = new ResponseBean();
         try {
-            admin.info("===UploadFileIntoS3Bucket START===");
+            admin.info("===UploadFileIntoS3Bucket START=== "+s3file.getOriginalFilename());
+            FileMetaData metaData = new FileMetaData();
+            metaData.setFileIn(s3file.getInputStream());
+            String fileName = APIConstants.getBaseFileName(s3file.getOriginalFilename());
+            String fileType = APIConstants.getFileExtension(s3file.getOriginalFilename());
+            metaData.setKeyName(fileName);
+            metaData.setKeyType(fileType);
+            metaData.setBucketName(bucketName);
             response = awsS3Service.UploadFileIntoS3Bucket(metaData.getBucketName(), metaData);
             admin.info("===UploadFileIntoS3Bucket END===");
         } catch (Exception e) {

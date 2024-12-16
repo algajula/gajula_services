@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.io.IOException;
@@ -89,4 +90,15 @@ public class ExceptionHandlerControllerAdvice {
 	            .body(error);
 	}
 
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+	public ResponseEntity<?> handleMaxSizeException(MaxUploadSizeExceededException exception) {
+		admin.info("handleInternalserverError UNKNOWN SERVER ERROR ERROR");
+		ExceptionResponse error = new ExceptionResponse();
+		error.setStatusCode(exception.getStatusCode().toString());
+		error.setStatusCodeDesc("EXPECTATION_FAILED");
+		error.setResult("EXPECTATION_FAILED File too large!");
+		return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(error);
+	}
 }

@@ -6,6 +6,7 @@ import com.gajula.model.ResponseBean;
 import com.gajula.util.APIConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.ResponseBytes;
@@ -16,6 +17,7 @@ import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,11 +62,26 @@ public class AwsS3ServiceImpl implements AwsS3Service{
     }
 
     @Override
-    public ResponseBean UploadFileIntoS3Bucket(String bucketName, FileMetaData FileMetaData) throws Exception {
+    public ResponseBean UploadFileIntoS3Bucket(String bucketName, FileMetaData fileMetaData) throws Exception {
         ResponseBean response = new ResponseBean();
         try {
             admin.info("AWS S3 UploadFileIntoS3Bucket Start");
-            admin.info("AWS S3 UploadFileIntoS3Bucket End");
+            String fileName = fileMetaData.getKeyName()+"."+fileMetaData.getKeyType();
+            PutObjectRequest objectRequest = PutObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(fileName)
+                    .contentType("application/pdf")
+                    .build();
+            String tempDir = System.getProperty("java.io.tmpdir");
+            File file = new File(tempDir+fileName);
+            admin.info("File path===="+file.getAbsolutePath());
+            try(OutputStream outputStream = new FileOutputStream(file)) {
+                IOUtils.copy(fileMetaData.getFileIn(), outputStream);
+            }
+            admin.info("create a file");
+            PutObjectResponse s3res = s3Client.putObject(objectRequest, Paths.get(file.toURI()));
+            String versionId = s3res.versionId();
+            admin.info("AWS S3 UploadFileIntoS3Bucket End versionId "+versionId);
         }catch (Exception e){
             admin.error("AWS S3 UploadFileIntoS3Bucket error "+e.getMessage());
         }
