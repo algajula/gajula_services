@@ -27,11 +27,15 @@ pageEncoding="ISO-8859-1"%>
         <div class="box">
             <label class="title01">AWS S3 Upload File:</label>
             <div align="center">
-                <form action="${pageContext.request.contextPath}/api/v1/aws/s3/uploads3file" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/api/v1/templates/s3fileupload" method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
+                        <td></td>
+                        <td><label><c:out value="${response.result}"/></label></td>
+                    </tr>
+                    <tr>
                         <td><label><spring:message code="label.awss3.bucketname"/></label></td>
-                        <td><input value="${bucketName}" type="text" id="bucketName" name="bucketName"/></td>
+                        <td><input value="<c:out value="${metaData.bucketName}"/>" type="text" id="bucketName" name="bucketName"/></td>
                     </tr>
                     <tr>
                         <td><label><spring:message code="label.awss3.uploadfile"/></label></td>

@@ -80,10 +80,15 @@ public class AwsS3ServiceImpl implements AwsS3Service{
             }
             admin.info("create a file");
             PutObjectResponse s3res = s3Client.putObject(objectRequest, Paths.get(file.toURI()));
+            admin.info("s3res===="+s3res);
             String versionId = s3res.versionId();
+            response.setResult("S3 File Upload Successfully!");
             admin.info("AWS S3 UploadFileIntoS3Bucket End versionId "+versionId);
         }catch (Exception e){
             admin.error("AWS S3 UploadFileIntoS3Bucket error "+e.getMessage());
+            response.setStatusCode("00");
+            response.setStatusDescription("FAILLURE");
+            response.setResult("error while upload file into s3 bucket");
         }
         return response;
     }
@@ -119,5 +124,25 @@ public class AwsS3ServiceImpl implements AwsS3Service{
         os.close();
         metadata.setFile(file);
         return metadata;
+    }
+
+    public ResponseBean deletes3file(RequestBean request) throws Exception{
+        ResponseBean response = new ResponseBean();
+        try{
+            admin.info("== deletes3file start ==");
+            DeleteObjectRequest s3req = DeleteObjectRequest.builder()
+                    .bucket(request.getBucketName())
+                    .key(request.getFileName())
+                    .build();
+            DeleteObjectResponse s3Res = s3Client.deleteObject(s3req);
+            response.setResult("File delete successfully");
+            admin.info("== deletes3file error ==");
+        }catch (Exception e){
+            admin.error("== deletes3file error =="+e.getMessage());
+            response.setStatusCode("00");
+            response.setStatusDescription("FAILLURE");
+            response.setResult("error while delete file from s3 bucket");
+        }
+        return response;
     }
 }
