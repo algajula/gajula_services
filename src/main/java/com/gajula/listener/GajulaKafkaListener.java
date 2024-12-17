@@ -1,10 +1,10 @@
 package com.gajula.listener;
 
-import com.gajula.dto.AddressDto;
-import com.gajula.dto.UserDto;
+import com.gajula.dto.BookDto;
+import com.gajula.dto.CustomerDto;
 import com.gajula.model.ResponseBean;
+import com.gajula.service.BookService;
 import com.gajula.service.CustomerService;
-import com.gajula.service.UserService;
 import com.gajula.util.APIConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,73 +20,55 @@ public class GajulaKafkaListener {
 
 	private final static Logger admin = LogManager.getLogger("admin");
 
-	@Value("train.kafka.topics.USERINFO_TOPIC")
-	private String userTopic;
-	@Value	("train.kafka.topics.USERINFO_TOPIC_ERROR")
-	private String userErrTopic;
-	@Value	("train.kafka.topics.ADDRESS_TOPIC")
-	private String addressTopic;
-	@Value	("train.kafka.topics.ADDRESS_TOPIC_ERROR")
-	private String addressErrorTopic;
+	@Value("train.kafka.topics.CUSTOMER_TOPIC")
+	private String customerTopic;
+	@Value	("train.kafka.topics.CUSTOMER_TOPIC_ERROR")
+	private String customerErrorTopic;
+	@Value	("train.kafka.topics.BOOK_TOPIC")
+	private String bookTopic;
+	@Value	("train.kafka.topics.BOOK_TOPIC_ERROR")
+	private String bookErrorTopic;
 
     @Autowired
 	CustomerService customerService;
 
 	@Autowired
-	UserService userService;
+	BookService bookService;
 
 	@Autowired
 	KafkaTemplate<String , String> kafkaTemplate;
 
-    @KafkaListener(topics = "${train.kafka.topics.USERINFO_TOPIC}", containerFactory = "userFactory")
-    public void processUSERINFO(String payload, Acknowledgment ack) throws Exception {
-		admin.info(String.format("$$$$ =>USERINFO Consumed message: " + payload));
+    @KafkaListener(topics = "${train.kafka.topics.CUSTOMER_TOPIC}", containerFactory = "userFactory")
+    public void processCUSTOMER(String payload, Acknowledgment ack) throws Exception {
+		admin.info(String.format("$$$$ =>CUSTOMER Consumed message: " + payload));
 		try{
-			admin.info("process USERINFO start");
-			UserDto userinfo = APIConstants.convertrequestToUserDto(payload);
-			ResponseBean response = new ResponseBean();
-			admin.info("UserID=======" + userinfo.getUserId());
-			boolean updtedFlag = userService.saveUserInfo(userinfo);
-			if (updtedFlag) {
-				response.setStatusCode(APIConstants.STATUS_SUCCESS_CODE);
-				response.setStatusDescription(APIConstants.STATUS_SUCCESS_DESC);
-				response.setResult("User saved successfully! " + updtedFlag);
-			} else {
-				response.setStatusCode(APIConstants.DATA_ERR_CODE);
-				response.setStatusDescription(APIConstants.DATA_ERR_DESC);
-				response.setResult("error while save user data! " + updtedFlag);
-			}
+			admin.info("process CUSTOMER start");
+			CustomerDto customer = APIConstants.getObjectMapper().readValue(payload, CustomerDto.class);
+			admin.info("CustomeId=======" + customer.getCustNumber());
+			boolean updtedFlag = customerService.saveCustomerDetails(customer);
+			admin.info("Customer addedd successfully! "+updtedFlag);
 			ack.acknowledge();
-			admin.info("process USERINFO end");
+			admin.info("process CUSTOMER end");
 		}catch (Exception e){
-			admin.error("process USERINFO Error "+e.getMessage());
-			kafkaTemplate.send(userErrTopic, "USERINFO_TOPIC_ERROR",payload);
+			admin.error("process CUSTOMER Error "+e.getMessage());
+			kafkaTemplate.send(customerErrorTopic, "CUSTOMER_TOPIC_ERROR",payload);
 		}
     }
 
-	@KafkaListener(topics = "${train.kafka.topics.ADDRESS_TOPIC}", containerFactory = "addressFactory")
-	public void processADDRESS(String payload, Acknowledgment ack) throws Exception {
-		admin.info(String.format("$$$$ =>ADDRESS Consumed message: " + payload));
+	@KafkaListener(topics = "${train.kafka.topics.BOOK_TOPIC}", containerFactory = "addressFactory")
+	public void processBOOK(String payload, Acknowledgment ack) throws Exception {
+		admin.info(String.format("$$$$ =>BOOK Consumed message: " + payload));
 		try{
-			admin.info("process ADDRESS start");
-			AddressDto addressinfo = APIConstants.convertrequestToAddressinfo(payload);
-			ResponseBean response = new ResponseBean();
-			admin.info("UserID=======" + addressinfo.getUserId());
-			boolean updtedFlag = userService.saveAddressInfo(addressinfo);
-			if (updtedFlag) {
-				response.setStatusCode(APIConstants.STATUS_SUCCESS_CODE);
-				response.setStatusDescription(APIConstants.STATUS_SUCCESS_DESC);
-				response.setResult("User saved successfully! " + updtedFlag);
-			} else {
-				response.setStatusCode(APIConstants.DATA_ERR_CODE);
-				response.setStatusDescription(APIConstants.DATA_ERR_DESC);
-				response.setResult("error while save user data! " + updtedFlag);
-			}
+			admin.info("process BOOK start");
+			BookDto book = APIConstants.getObjectMapper().readValue(payload,BookDto.class);
+			admin.info("BookID=======" + book.getBook_id());
+			ResponseBean response = bookService.addNewBook(book);
+			admin.info("Book added successfully! ===="+response);
 			ack.acknowledge();
-			admin.info("process ADDRESS end");
+			admin.info("process BOOK end");
 		}catch (Exception e){
-			admin.error("process ADDRESS Error "+e.getMessage());
-			kafkaTemplate.send(addressErrorTopic, "ADDRESS_TOPIC_ERROR",payload);
+			admin.error("process BOOK Error "+e.getMessage());
+			kafkaTemplate.send(bookErrorTopic, "BOOK_TOPIC_ERROR",payload);
 		}
 	}
 }

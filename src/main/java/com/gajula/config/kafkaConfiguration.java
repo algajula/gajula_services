@@ -65,37 +65,37 @@ public class kafkaConfiguration {
 		return new KafkaTemplate<>(producerFactory());
 	}
 
-	@Bean(name = "userConsumerFactory")
-	public ConsumerFactory<String, String> userConsumerFactory() {
+	@Bean(name = "customerConsumerFactory")
+	public ConsumerFactory<String, String> customerConsumerFactory() {
 		Map<String, Object> props = getConsumerFactoryProperties();
-		admin.info("User Consumer factory created ");
+		admin.info("Customer Consumer factory created ");
 		return new DefaultKafkaConsumerFactory<>(props);
 	}
 
-	@Bean(name = "userFactory")
-	public ConcurrentKafkaListenerContainerFactory<String, String> userFactory() {
+	@Bean(name = "customerFactory")
+	public ConcurrentKafkaListenerContainerFactory<String, String> customerFactory() {
 		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-		factory.setConsumerFactory(userConsumerFactory());
+		factory.setConsumerFactory(customerConsumerFactory());
 		factory.getContainerProperties().setPollTimeout(pollTimeout);
 		factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
-		admin.info("=====User Factory==========");
+		admin.info("=====Customer Factory==========");
 		return factory;
 	}
 
-	@Bean(name = "addressConsumerFactory")
-	public ConsumerFactory<String, String> addessConsumerFactory() {
+	@Bean(name = "bookConsumerFactory")
+	public ConsumerFactory<String, String> bookConsumerFactory() {
 		Map<String, Object> props = getConsumerFactoryProperties();
-		admin.info("Address Consumer factory created ");
+		admin.info("Book Consumer factory created ");
 		return new DefaultKafkaConsumerFactory<>(props);
 	}
 
-	@Bean(name = "addressFactory")
-	public ConcurrentKafkaListenerContainerFactory<String, String> addressFactory() {
+	@Bean(name = "bookFactory")
+	public ConcurrentKafkaListenerContainerFactory<String, String> bookFactory() {
 		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-		factory.setConsumerFactory(addessConsumerFactory());
+		factory.setConsumerFactory(bookConsumerFactory());
 		factory.getContainerProperties().setPollTimeout(pollTimeout);
 		factory.getContainerProperties().setAckMode(AckMode.MANUAL_IMMEDIATE);
-		admin.info("=====Address Factory==========");
+		admin.info("=====Book Factory==========");
 		return factory;
 	}
 
