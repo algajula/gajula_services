@@ -38,7 +38,7 @@ public class GajulaKafkaListener {
 	@Autowired
 	KafkaTemplate<String , String> kafkaTemplate;
 
-    @KafkaListener(topics = "${train.kafka.topics.CUSTOMER_TOPIC}", containerFactory = "userFactory")
+    @KafkaListener(topics = "${train.kafka.topics.CUSTOMER_TOPIC}", containerFactory = "customerFactory")
     public void processCUSTOMER(String payload, Acknowledgment ack) throws Exception {
 		admin.info(String.format("$$$$ =>CUSTOMER Consumed message: " + payload));
 		try{
@@ -55,7 +55,7 @@ public class GajulaKafkaListener {
 		}
     }
 
-	@KafkaListener(topics = "${train.kafka.topics.BOOK_TOPIC}", containerFactory = "addressFactory")
+	@KafkaListener(topics = "${train.kafka.topics.BOOK_TOPIC}", containerFactory = "bookFactory")
 	public void processBOOK(String payload, Acknowledgment ack) throws Exception {
 		admin.info(String.format("$$$$ =>BOOK Consumed message: " + payload));
 		try{
