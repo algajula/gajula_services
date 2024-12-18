@@ -3,8 +3,10 @@ package com.gajula.controller;
 import com.gajula.dto.BookDto;
 import com.gajula.exception.CustomException;
 import com.gajula.model.ResponseBean;
+import com.gajula.model.ValidateForm;
 import com.gajula.service.BookService;
 import com.gajula.util.APIConstants;
+import com.gajula.validator.BookValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class BookRestController {
 
 	@Autowired
 	BookService bookService;
+
+	@Autowired
+	BookValidator bookValidator;
 
 	@GetMapping(value = "/getAllBooks", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getAllBooks() throws Exception {
@@ -67,11 +72,28 @@ public class BookRestController {
 		ResponseBean response = new ResponseBean();
 		try {
 			admin.info("===saveBook START===");
+			admin.info("Request JSOn="+reqStr);
 			BookDto book = APIConstants.getObjectMapper().readValue(reqStr, BookDto.class);
+			ValidateForm validateForm = bookValidator.validateForm(book);
+			admin.info("Form has errors ======"+validateForm.isHasRrrors());
 			if(actionType.equalsIgnoreCase("save")){
-				response = bookService.addNewBook(book);
+				admin.info("========= NEW BOOK =====================");
+				if(validateForm.isHasRrrors()) {
+					response.setStatusCode(APIConstants.DATA_ERR_CODE);
+					response.setStatusDescription(APIConstants.DATA_ERR_DESC);
+					response.setResult(validateForm);
+				}else {
+					response = bookService.addNewBook(book);
+				}
 			}else if(actionType.equalsIgnoreCase("update")){
-				response = bookService.updateExistingBook(book);
+				admin.info("========= EDIT BOOK =====================");
+				if(validateForm.isHasRrrors()){
+					response.setStatusCode(APIConstants.DATA_ERR_CODE);
+					response.setStatusDescription(APIConstants.DATA_ERR_DESC);
+					response.setResult(validateForm);
+				}else {
+					response = bookService.updateExistingBook(book);
+				}
 			}
 			admin.info("===saveBook END===");
 		} catch (Exception e) {

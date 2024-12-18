@@ -20,9 +20,12 @@ $(document).ready(function () {
                  'X-Requested-With': 'XMLHttpRequest',
               },
               success: function(data){
-                  let obj = JSON.stringify(data.result);
-                  alert('response'+obj);
-                  $.each(obj, function(key, value) {
+                  var result = JSON.stringify(data.result);
+                  var res1 = JSON.parse(result)
+                  var labels = JSON.stringify(res1.errorlabels);
+                  alert("title error"+labels);
+
+                  $.each(JSON.parse(result), function(key, value) {
                       console.log(key+"=="+value);
                   });
                   return true;
