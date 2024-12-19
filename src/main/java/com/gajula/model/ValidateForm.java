@@ -5,15 +5,15 @@ import java.util.HashMap;
 
 public class ValidateForm implements Serializable {
 
-    private boolean hasRrrors;
+    private boolean hasErrors;
     private HashMap<String, String> errorlabels;
 
-    public boolean isHasRrrors() {
-        return hasRrrors;
+    public boolean isHasErrors() {
+        return hasErrors;
     }
 
-    public void setHasRrrors(boolean hasRrrors) {
-        this.hasRrrors = hasRrrors;
+    public void setHasErrors(boolean hasErrors) {
+        this.hasErrors = hasErrors;
     }
 
     public HashMap<String, String> getErrorlabels() {
@@ -27,7 +27,7 @@ public class ValidateForm implements Serializable {
     @Override
     public String toString() {
         return "ValidateForm{" +
-                "hasRrrors=" + hasRrrors +
+                "hasErrors=" + hasErrors +
                 ", errorlabels=" + errorlabels +
                 '}';
     }

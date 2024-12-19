@@ -13,14 +13,14 @@ public class APIConstants {
 
     private final static Logger admin = LogManager.getLogger("admin");
 
-    public static final String DATA_ERR_CODE = "02";
+	public static String STATUS_SUCCESS_CODE="00";
+	public static String STATUS_SUCCESS_DESC="SUCCESS";
+	public static String STATUS_FAILURE_CODE = "01";
+	public static String STATUS_FAILURE_DESC = "FAILURE";
+	public static final String DATA_ERR_CODE = "02";
     public static final String DATA_ERR_DESC = "ERR";
 	public static final String DATA_TIMEOUT_CODE = "03";
 	public static final String DATA_TIMEOUT_DESC = "TIMEOUT";
-	public static String STATUS_FAILURE_CODE = "02";
-	public static String STATUS_FAILURE_DESC = "FAILURE";
-	public static String STATUS_SUCCESS_CODE="00";
-	public static String STATUS_SUCCESS_DESC="SUCCESS";
 
     @SuppressWarnings("deprecation")
     public static ObjectMapper getObjectMapper() {

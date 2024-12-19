@@ -75,10 +75,10 @@ public class BookRestController {
 			admin.info("Request JSOn="+reqStr);
 			BookDto book = APIConstants.getObjectMapper().readValue(reqStr, BookDto.class);
 			ValidateForm validateForm = bookValidator.validateForm(book);
-			admin.info("Form has errors ======"+validateForm.isHasRrrors());
+			admin.info("Form has errors ======"+validateForm.isHasErrors());
 			if(actionType.equalsIgnoreCase("save")){
 				admin.info("========= NEW BOOK =====================");
-				if(validateForm.isHasRrrors()) {
+				if(validateForm.isHasErrors()) {
 					response.setStatusCode(APIConstants.DATA_ERR_CODE);
 					response.setStatusDescription(APIConstants.DATA_ERR_DESC);
 					response.setResult(validateForm);
@@ -87,7 +87,7 @@ public class BookRestController {
 				}
 			}else if(actionType.equalsIgnoreCase("update")){
 				admin.info("========= EDIT BOOK =====================");
-				if(validateForm.isHasRrrors()){
+				if(validateForm.isHasErrors()){
 					response.setStatusCode(APIConstants.DATA_ERR_CODE);
 					response.setStatusDescription(APIConstants.DATA_ERR_DESC);
 					response.setResult(validateForm);

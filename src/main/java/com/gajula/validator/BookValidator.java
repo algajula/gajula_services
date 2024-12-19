@@ -24,8 +24,9 @@ public class BookValidator {
         if(null != book.getPrice()){
             labels.put("price","Please fill Price!");
         }
+        admin.info("labels  map "+labels);
         errorForm.setErrorlabels(labels);
-        errorForm.setHasRrrors(!labels.isEmpty());
+        errorForm.setHasErrors(!labels.isEmpty());
         return errorForm;
     }
 

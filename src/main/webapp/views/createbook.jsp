@@ -31,12 +31,12 @@ pageEncoding="ISO-8859-1"%>
                     <tr>
                         <td><label><spring:message code="label.book.title"/></label></td>
                         <td><input type="text" id="title" /></td>
-                        <td><label id="titleerr" class="titleerr" /></td>
+                        <td><label for="titleerr" id="titleerr" class="titleerr" style="color:red"></label></td>
                     </tr>
                     <tr>
                         <td><label><spring:message code="label.book.genre"/></label></td>
                         <td><input type="text" id="genre" /></td>
-                        <td><label id="genreerr" class="genreerr" /></td>
+                        <td><label for="genreerr" id="genreerr" class="genreerr" style="color:red"></label></td>
                     </tr>
                     <tr>
                         <td><label><spring:message code="label.book.publishDate"/></label></td>
@@ -45,7 +45,7 @@ pageEncoding="ISO-8859-1"%>
                     <tr>
                         <td><label><spring:message code="label.book.price"/></label></td>
                         <td><input type="text" id="price" /></td>
-                        <td><label id="priceerr" class="priceerr" /></td>
+                        <td><label for="priceerr" id="priceerr" class="priceerr" style="color:red"></label></td>
                     </tr>
                     <tr>
                         <td><button name="savebook" id="savebook" class="savebook"><spring:message code="action.save"/></button></td>
