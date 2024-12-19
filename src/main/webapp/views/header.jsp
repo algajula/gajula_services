@@ -1,3 +1,3 @@
 <div align="center">
-    <h2>Spring Rest Application</h2>
+    <h2>Spring Boot Practice Application</h2>
 </div>
