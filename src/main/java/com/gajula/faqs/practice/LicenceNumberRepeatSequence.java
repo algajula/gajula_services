@@ -1,4 +1,4 @@
-package com.gajula.faqs;
+package com.gajula.faqs.practice;
 
 public class LicenceNumberRepeatSequence {
     /*public static void main(String[] args) {

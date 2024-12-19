@@ -1,5 +1,7 @@
-package com.gajula.faqs;
+package com.gajula.faqs.practice;
 
+
+import com.gajula.faqs.Product;
 
 import java.util.ArrayList;
 import java.util.Arrays;

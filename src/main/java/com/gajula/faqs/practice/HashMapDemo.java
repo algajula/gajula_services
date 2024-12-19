@@ -1,4 +1,4 @@
-package com.gajula.faqs;
+package com.gajula.faqs.practice;
 
 import java.util.HashMap;
 
