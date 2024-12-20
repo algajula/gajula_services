@@ -13,6 +13,14 @@ public class JavaPracticeExamples {
         helper.findPairsAreCorrectOrder();
         helper.SwapTwoNumberWithoutThirdVariable();
         helper.arrangeSequentialOrder();
+
+        System.out.println("======= Employee manipulation ========================");
+        helper.findHighestSalaryfromEmployees();
+        helper.findNthHighestSalaryfromEmployees();
+        helper.findEmployeeNameStartFromCharector("g");
+        helper.sortingEmployeesByEmployeeName();
+        helper.sortingEmployeesByEmployeeSalary();
+
         System.out.println("======= JavaPracticeExamples End ===========");
     }
 }

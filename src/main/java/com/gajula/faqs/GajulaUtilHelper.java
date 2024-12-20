@@ -406,6 +406,31 @@ public class GajulaUtilHelper {
         System.out.println("======= arrangeSequentialOrder End ==========");
     }
 
+    public void findHighestSalaryfromEmployees(){
+        System.out.println("======= findHighestSalaryfromEmployees Start ==========");
+        System.out.println("======= findHighestSalaryfromEmployees End ==========");
+    }
+
+    public void findNthHighestSalaryfromEmployees(){
+        System.out.println("======= findNthHighestSalaryfromEmployees Start ==========");
+        System.out.println("======= findNthHighestSalaryfromEmployees End ==========");
+    }
+
+    public void findEmployeeNameStartFromCharector(String startCHar){
+        System.out.println("======= findEmployeeNameStartFromCharector Start ==========");
+        System.out.println("======= findEmployeeNameStartFromCharector End ==========");
+    }
+
+    public void sortingEmployeesByEmployeeName(){
+        System.out.println("======= sortingEmployeesByEmployeeName Start ==========");
+        System.out.println("======= sortingEmployeesByEmployeeName End ==========");
+    }
+
+    public void sortingEmployeesByEmployeeSalary(){
+        System.out.println("======= sortingEmployeesByEmployeeSalary Start ==========");
+        System.out.println("======= sortingEmployeesByEmployeeSalary End ==========");
+    }
+
     public static List<Employee> getEmployeeList(){
         List<Employee> list = new ArrayList<>();
         list.add(new Employee(1101, "gajula", 110000.00));
