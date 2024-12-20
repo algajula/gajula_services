@@ -24,8 +24,6 @@ public class GajulaUtilHelper {
     public final static List<String> listString1 = Arrays.asList("test", "gajula", "bakash", "test", "test2", "gajula", "abc", "test3");
     public final static List<String> listString2 = Arrays.asList("f", "w", "d", "a", "c", "c", "a", "d", "g", "c", "t", "n");
 
-    public final static String inputPairsString = "[(]{}{[()()]()}";
-
     public void repeatedOrDuplicatesOrUniqueOrFirstRepeatOrFirstNonRepeatDigits(){
         System.out.println("======= repeatedOrDuplicatesOrUniqueOrFirstRepeatOrFirstNonRepeatDigits Start ==========");
 
@@ -335,7 +333,7 @@ public class GajulaUtilHelper {
         System.out.println("======= findAllElementsStartFromCharestor End ==========");
     }
 
-    public void findPairsAreCorrectOrder(){
+    public void findPairsAreCorrectOrder(String inputPairsString){
         System.out.println("======= findPairsAreCorrectOrder Start ==========");
 
         System.out.println("\nINPUT=========="+inputPairsString);
@@ -406,30 +404,81 @@ public class GajulaUtilHelper {
         System.out.println("======= arrangeSequentialOrder End ==========");
     }
 
+    public void getEmployeeListINPUT(){
+        getEmployeeList().forEach(System.out::println);
+    }
+
+    public void sortingEmployeesByEmpoyeeNameAndSalary(){
+        System.out.println("======= sortingEmployeesByEmpoyeeNameAndSalary Start ==========");
+        System.out.println("\nBy Name");
+        getEmployeeList().stream()
+                .sorted(Collections.reverseOrder(
+                        (emp1, emp2) -> emp1.getEname().compareTo(emp2.getEname()) == 0 ?
+                                emp1.getEname().compareTo(emp2.getEname()) :
+                                emp2.getEname().compareTo(emp1.getEname()) ) )
+                .forEach(System.out::println);
+        System.out.println("\nBy Salary");
+        getEmployeeList().stream()
+                .sorted(Collections.reverseOrder(
+                        (emp1, emp2) -> emp1.getSalary().compareTo(emp2.getSalary()) == 0 ?
+                                emp1.getSalary().compareTo(emp2.getSalary()) :
+                                emp2.getSalary().compareTo(emp1.getSalary()) ) )
+                .forEach(System.out::println);
+
+        System.out.println("======= sortingEmployeesByEmpoyeeNameAndSalary End ==========");
+    }
+
     public void findHighestSalaryfromEmployees(){
         System.out.println("======= findHighestSalaryfromEmployees Start ==========");
+        Employee emp = getEmployeeList().stream()
+                .sorted(
+                        (emp1, emp2) -> emp1.getSalary().compareTo(emp2.getSalary()) == 0 ?
+                        emp1.getSalary().compareTo(emp2.getSalary()) :
+                        emp2.getSalary().compareTo(emp1.getSalary()) )
+                .toList()
+                .get(0);
+        System.out.println("RESULT======"+emp);
+
         System.out.println("======= findHighestSalaryfromEmployees End ==========");
     }
 
-    public void findNthHighestSalaryfromEmployees(){
+    public void findNthHighestSalaryfromEmployees(int position){
         System.out.println("======= findNthHighestSalaryfromEmployees Start ==========");
+        Employee emp = getEmployeeList().stream()
+                .sorted(
+                        (emp1, emp2) -> emp1.getSalary().compareTo(emp2.getSalary()) == 0 ?
+                                emp1.getSalary().compareTo(emp2.getSalary()) :
+                                emp2.getSalary().compareTo(emp1.getSalary()) )
+                .toList()
+                .get(position);
+        System.out.println("RESULT======"+emp);
         System.out.println("======= findNthHighestSalaryfromEmployees End ==========");
+    }
+
+    public void findSameSalaryfromEmployees(){
+        System.out.println("======= findSameSalaryfromEmployees Start ==========");
+        Map<Object, Long>  list = getEmployeeList().stream()
+                .map(Employee::getSalary)
+                .collect(Collectors.groupingBy(value -> value, LinkedHashMap::new, Collectors.counting()));
+        System.out.println("Step1=="+list);
+        System.out.println("Step1=="+list);
+        Set<Object> result = list.entrySet()
+                            .stream()
+                            .filter(m -> m.getValue() > 1)
+                            .collect(Collectors.toSet());
+        System.out.println("Step2=="+result);
+        System.out.println("======= findSameSalaryfromEmployees End ==========");
     }
 
     public void findEmployeeNameStartFromCharector(String startCHar){
         System.out.println("======= findEmployeeNameStartFromCharector Start ==========");
+        List<Employee> list = getEmployeeList().stream()
+                .filter(emp -> emp.getEname().startsWith(startCHar))
+                .toList();
+        list.forEach(System.out::println);
         System.out.println("======= findEmployeeNameStartFromCharector End ==========");
     }
 
-    public void sortingEmployeesByEmployeeName(){
-        System.out.println("======= sortingEmployeesByEmployeeName Start ==========");
-        System.out.println("======= sortingEmployeesByEmployeeName End ==========");
-    }
-
-    public void sortingEmployeesByEmployeeSalary(){
-        System.out.println("======= sortingEmployeesByEmployeeSalary Start ==========");
-        System.out.println("======= sortingEmployeesByEmployeeSalary End ==========");
-    }
 
     public static List<Employee> getEmployeeList(){
         List<Employee> list = new ArrayList<>();
@@ -443,6 +492,7 @@ public class GajulaUtilHelper {
         list.add(new Employee(1108, "gajula", 180000.00));
         list.add(new Employee(1109, "pqr", 190000.00));
         list.add(new Employee(1110, "mno", 200000.00));
+        list.add(new Employee(1110, "mno", 170000.00));
         return list;
     }
 

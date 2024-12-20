@@ -10,16 +10,20 @@ public class JavaPracticeExamples {
         helper.NthHighestNumberfromInt(1); //pass position
         helper.findAllElementsStartFromDigit("2"); //pass digit
         helper.findAllElementsStartFromCharestor("g"); //pass charector
-        helper.findPairsAreCorrectOrder();
+        String inputPairsString = "[(]{}{[()()]()}";
+        helper.findPairsAreCorrectOrder(inputPairsString);
+        inputPairsString = "[]{}{[()()]()}";
+        helper.findPairsAreCorrectOrder(inputPairsString);
         helper.SwapTwoNumberWithoutThirdVariable();
         helper.arrangeSequentialOrder();
 
         System.out.println("======= Employee manipulation ========================");
+        helper.getEmployeeListINPUT();
+        helper.sortingEmployeesByEmpoyeeNameAndSalary();
         helper.findHighestSalaryfromEmployees();
-        helper.findNthHighestSalaryfromEmployees();
+        helper.findNthHighestSalaryfromEmployees(2);
+        helper.findSameSalaryfromEmployees();
         helper.findEmployeeNameStartFromCharector("g");
-        helper.sortingEmployeesByEmployeeName();
-        helper.sortingEmployeesByEmployeeSalary();
 
         System.out.println("======= JavaPracticeExamples End ===========");
     }
