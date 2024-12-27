@@ -17,7 +17,7 @@ import java.util.Map;
 @Configuration
 public class kafkaConfiguration {
 
-	private final static Logger admin = LogManager.getLogger("admin");
+	private final static Logger admin = LogManager.getLogger(kafkaConfiguration.class.getName());
 
 	@Value("${train.kafka.consumer.bootstrap-servers}")
 	private String bootstrapServers;

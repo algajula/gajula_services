@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GajulaKafkaListener {
 
-	private final static Logger admin = LogManager.getLogger("admin");
+	private final static Logger admin = LogManager.getLogger(GajulaKafkaListener.class.getName());
 
 	@Value("train.kafka.topics.CUSTOMER_TOPIC")
 	private String customerTopic;

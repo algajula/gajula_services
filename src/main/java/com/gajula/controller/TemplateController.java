@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("/api/v1/templates/")
 public class TemplateController {
 
-    private final static Logger admin = LogManager.getLogger("admin");
+    private final static Logger admin = LogManager.getLogger(TemplateController.class.getName());
 
     @Autowired
     MasterService masterService;

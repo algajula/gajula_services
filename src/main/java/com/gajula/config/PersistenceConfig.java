@@ -25,7 +25,7 @@ import java.util.Properties;
 		transactionManagerRef ="transactionManager")
 public class PersistenceConfig {
 
-	private final static Logger admin = LogManager.getLogger("admin");
+	private final static Logger admin = LogManager.getLogger(PersistenceConfig.class.getName());
 
 	@Value("${spring.datasource.url}")
 	private String dbUrl;

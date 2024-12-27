@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 public class WebConfig {
 
-    private final static Logger admin = LogManager.getLogger("admin");
+    private final static Logger admin = LogManager.getLogger(WebConfig.class.getName());
 
     @Bean
     public ViewResolver getViewResolver() {

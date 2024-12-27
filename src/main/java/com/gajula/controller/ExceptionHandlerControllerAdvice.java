@@ -21,7 +21,7 @@ import java.io.IOException;
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
 
-	private final static Logger admin = LogManager.getLogger("admin");
+	private final static Logger admin = LogManager.getLogger(ExceptionHandlerControllerAdvice.class.getName());
 	
 	@ExceptionHandler(CustomException.class)
 	public ResponseEntity handleException(final CustomException exception,
