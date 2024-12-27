@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 
 public class APIConstants {
 
-    private final static Logger admin = LogManager.getLogger("admin");
+    private final static Logger admin = LogManager.getLogger(APIConstants.class.getName());
 
 	public static String STATUS_SUCCESS_CODE="00";
 	public static String STATUS_SUCCESS_DESC="SUCCESS";

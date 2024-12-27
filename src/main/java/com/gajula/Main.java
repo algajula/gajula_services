@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@EnableKafka
 public class Main {
 
-	private final static Logger admin = LogManager.getLogger(Main.class.getName());
+	private final static Logger admin = LogManager.getLogger(Main.class);
 
 	public static void main(String[] args) throws Exception{
 		try{
