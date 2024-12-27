@@ -1,0 +1,12 @@
+Swagger UI:  http://localhost:8080/gajula/swagger-ui/index.html
+
+H2Database & data.sql load == done
+JPA Persistece/Repositories  == done
+kafka Listener/Template  == done
+Static resources  == done
+UI Components  == done
+Message Labels  == done
+Upload/Download  == done
+Open API == done
+OAuth2.0  ==
+AWS S3 == done

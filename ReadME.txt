@@ -12,7 +12,14 @@ classpath:
 SET PATH=C:\ALLABAKASH\setups\jdk-17.0.11\bin;%PATH%
 SET JRE_HOME=C:\ALLABAKASH\setups\jdk-17.0.11
 
-
+ENV:
+SET PATH=C:\ALLABAKASH\setups\jdk-17.0.11\bin;%PATH%
+SET JAVA_HOME=C:\ALLABAKASH\setups\jdk-17.0.11
+SET JRE_HOME=C:\ALLABAKASH\setups\jdk-17.0.11
+SET JBOSS_HOME=C:\ALLABAKASH\setups\wildfly27
+SET PATH=C:\Windows\System32;%PATH%
+SET PATH=C:\winutils\bin;%PATH%
+Modules: C:\ALLABAKASH\setups\jboss\modules\javax\servlet
 
 Modules:
 Database: H2 database
