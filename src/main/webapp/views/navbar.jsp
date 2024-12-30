@@ -1,5 +1,5 @@
 <div class="navbar">
-        <a href="${pageContext.request.contextPath}/">Home</a>
+        <a href="${pageContext.request.contextPath}/home">Home</a>
         <div class="subnav">
             <button class="subnavbtn">Book <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
