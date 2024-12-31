@@ -8,13 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude= { HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class, KafkaAutoConfiguration.class})
 @EnableScheduling
 @OpenAPIDefinition
 //@EnableKafka
-public class Main {
+public class Main extends SpringBootServletInitializer {
 
 	private final static Logger admin = LogManager.getLogger(Main.class);
 
@@ -28,5 +30,10 @@ public class Main {
 			e.printStackTrace();
 			admin.error("Spring Boot Main error "+e.getMessage());
 		}
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(Main.class);
 	}
 }

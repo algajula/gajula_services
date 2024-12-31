@@ -1,7 +1,6 @@
 package com.gajula.controller;
 
 import com.gajula.dto.BookDto;
-import com.gajula.dto.CountryDto;
 import com.gajula.dto.CustomerDto;
 import com.gajula.dto.UserDto;
 import com.gajula.exception.CustomException;
@@ -22,20 +21,18 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/templates/")
 public class TemplateController {
 
-    private final static Logger admin = LogManager.getLogger(TemplateController.class.getName());
+    private final static Logger admin = LogManager.getLogger(TemplateController.class);
 
     @Autowired
     MasterService masterService;
@@ -89,9 +86,15 @@ public class TemplateController {
     }
 
     @RequestMapping("/bookview")
-    public String bookview(Model model) throws Exception{
+    public String bookview(Model model, HttpServletRequest request) throws Exception{
         admin.info("=== book view Start ===");
         admin.info("==== All ====");
+        admin.info("authtype===="+request.getAuthType());
+        Enumeration<String> headerNames = request.getHeaderNames();
+        headerNames.asIterator().forEachRemaining(header -> {
+            System.out.println("Header Name:" + header + "   " + "Header Value:" + request.getHeader(header));
+        });
+        admin.info("Request Headers "+request.getHeaderNames());
         List<BookDto> bookList = bookRepository.findAll();
         model.addAttribute("book", new BookDto());
         model.addAttribute("bookList", bookList);
