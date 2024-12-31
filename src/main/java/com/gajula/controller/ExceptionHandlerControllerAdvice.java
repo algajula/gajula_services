@@ -3,6 +3,7 @@ package com.gajula.controller;
 import com.gajula.exception.BadRequestException;
 import com.gajula.exception.CustomException;
 import com.gajula.exception.ExceptionResponse;
+import com.gajula.exception.InternalServerException;
 import com.gajula.util.APIConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -77,10 +78,13 @@ public class ExceptionHandlerControllerAdvice {
 	}
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity handleInternalserverError(final CustomException exception,
-			final HttpServletRequest request) throws IOException {
+    @ExceptionHandler(InternalServerException.class)
+    public ResponseEntity handleInternalserverError(final InternalServerException exception) throws IOException {
 		admin.info("handleInternalserverError UNKNOWN SERVER ERROR ERROR");
+		admin.info(" Interserver error 1111 "+exception.getMessage());
+		admin.info(" Interserver error 2222 "+exception.getCause());
+		admin.info(" Interserver error 3333 "+exception.getServiceName());
+		admin.info(" Interserver error 4444 "+exception.getCurrentRowNumber());
 		ExceptionResponse error = new ExceptionResponse();
 		error.setStatusCode("500");
 		error.setStatusCodeDesc("INTERNAL_SERVER_ERROR");

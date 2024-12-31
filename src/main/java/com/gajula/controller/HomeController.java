@@ -14,7 +14,7 @@ public class HomeController {
 
 	private final static Logger admin = LogManager.getLogger(HomeController.class.getName());
 	
-	@RequestMapping("/")
+	@RequestMapping("/home")
 	public String welcome() {
 		admin.info("===WELCOME START===");
 		admin.info("===WELCOME END===");
