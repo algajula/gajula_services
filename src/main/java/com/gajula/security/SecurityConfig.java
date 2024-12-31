@@ -28,7 +28,6 @@ public class SecurityConfig {
 
 	private final static Logger admin = LogManager.getLogger(SecurityConfig.class);
 
-
 	@Autowired
 	private AadJwtDecoder aadJwtDecoder;
 
@@ -41,8 +40,9 @@ public class SecurityConfig {
 						.requestMatchers("/swagger-ui.html","/swagger-ui/**", "/swagger-resources/**",
 								"/webjars/**", "/v3/api-docs/**", "/h2-console/**",
 								"/home/**", "/views/**",
-								"/css/**", "/js/**", "/images/**").permitAll()
-						.requestMatchers("/api/v1/**").authenticated()
+								"/css/**", "/js/**", "/images/**",
+								"/api/v1/templates/**", "/api/v1/master/**").permitAll()
+						.requestMatchers("/api/v1/aws/s3/**", "/api/v1/book/**", "/api/v1/customer/**").authenticated()
 				)
 				.exceptionHandling(exp -> exp.authenticationEntryPoint(authenticationEntryPoint())
 						                     .accessDeniedHandler(accessDeniedHandler()))
