@@ -16,4 +16,7 @@ public interface CustomerRespository extends JpaRepository<CustomerDto, BigInteg
 	
 	@Query(value = "SELECT c FROM CustomerDto c")
 	public List<CustomerDto> getAllCustomer();
+
+	@Query(value = "SELECT c FROM CustomerDto c WHERE c.custNumber = :custNumber")
+	public List<CustomerDto> getCustomerByNumber(Long custNumber);
 }

@@ -2,6 +2,7 @@ package com.gajula.service;
 
 import com.gajula.dao.CustomerDao;
 import com.gajula.model.ResponseBean;
+import com.gajula.repository.CustomerRespository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.gajula.dto.CustomerDto;
@@ -23,6 +24,9 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     CustomerDao customerDao;
 
+    @Autowired
+    CustomerRespository customerRespository;
+
     @Override
     public ResponseBean getCustomerDetails() throws Exception {
         ResponseBean response = new ResponseBean();
@@ -38,6 +42,23 @@ public class CustomerServiceImpl implements CustomerService{
                     admin.info("VEHICLE----" + veh.getVeh_uid() + "==" + veh.getVrn() + "==" + veh.getVin());
                 }
             }
+            response.setResult(list);
+            admin.info("getCustomerDetails start");
+        } catch (Exception e) {
+            response.setStatusCode("00");
+            response.setStatusDescription("FAILLURE");
+            admin.info("error in getCustomerDetails=" + e.getMessage());
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseBean getCustomerDetailsById(Long custId) throws Exception {
+        ResponseBean response = new ResponseBean();
+        List<CustomerDto> list = new ArrayList<CustomerDto>();
+        try {
+            admin.info("getCustomerDetails start "+custId);
+            list = customerRespository.getCustomerByNumber(custId);
             response.setResult(list);
             admin.info("getCustomerDetails start");
         } catch (Exception e) {

@@ -17,7 +17,11 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +39,8 @@ public class SecurityConfig {
 	protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		admin.info("Configure---> Start");
 		http
-				.csrf(AbstractHttpConfigurer::disable)
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+				//.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests((authorize) -> authorize
 						.requestMatchers("/swagger-ui.html","/swagger-ui/**", "/swagger-resources/**",
 								"/webjars/**", "/v3/api-docs/**", "/h2-console/**",
@@ -46,8 +51,8 @@ public class SecurityConfig {
 				)
 				.exceptionHandling(exp -> exp.authenticationEntryPoint(authenticationEntryPoint())
 						                     .accessDeniedHandler(accessDeniedHandler()))
-				.csrf(AbstractHttpConfigurer::disable)
-				.cors(AbstractHttpConfigurer::disable)
+				//.csrf(AbstractHttpConfigurer::disable)
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.oauth2ResourceServer((oauth2) ->
 						oauth2.jwt((jwt1) -> jwt1.decoder(jwtDecoder())
@@ -85,13 +90,31 @@ public class SecurityConfig {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedMethods("*")
-						.allowedOriginPatterns("*")
-						.allowedHeaders("*")
-						.allowCredentials(true);
+						.allowedMethods("GET", "POST", "PUT", "DELETE")
+						.allowedOrigins("*")
+						.allowedHeaders("*");
+						//.allowedOriginPatterns("*")
+						//.allowCredentials(true);
 			}
 		};
 	}*/
+
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration corsConfig = new CorsConfiguration();
+		corsConfig.applyPermitDefaultValues();
+		corsConfig.setAllowCredentials(true);
+		corsConfig.addAllowedMethod("GET");
+		corsConfig.addAllowedMethod("PATCH");
+		corsConfig.addAllowedMethod("POST");
+		corsConfig.addAllowedMethod("OPTIONS");
+		corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
+		corsConfig.setAllowedHeaders(Arrays.asList("*"));
+		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfig);
+		return source;
+	}
 
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
