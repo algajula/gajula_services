@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/book/")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BookRestController {
 
 	private final static Logger admin = LogManager.getLogger(BookRestController.class.getName());
@@ -27,7 +27,7 @@ public class BookRestController {
 	@Autowired
 	BookValidator bookValidator;
 
-	@GetMapping(value = "/getAllBooks", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = { "/service/getAllBooks", "/ui/getAllBooks" }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getAllBooks() throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
@@ -40,7 +40,7 @@ public class BookRestController {
 		return response;
 	}
 
-	@GetMapping(value = "/getBookByTitle/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = { "/service/getBookByTitle/{title}", "/ui/getBookByTitle/{title}" }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getBookByTitle(@PathVariable("title") String title) throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
@@ -53,7 +53,7 @@ public class BookRestController {
 		return response;
 	}
 
-	@GetMapping(value = "/getBookByGenre/{genre}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = { "/service/getBookByGenre/{genre}", "/ui/getBookByGenre/{genre}" }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getBookByGenre(@PathVariable("genre") String genre) throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
@@ -66,7 +66,7 @@ public class BookRestController {
 		return response;
 	}
 
-	@PostMapping(value = "/saveBook/{actionType}", produces = "application/json", consumes = "application/json")
+	@PostMapping(value = { "/service/saveBook/{actionType}", "/ui/saveBook/{actionType}"}, produces = "application/json", consumes = "application/json")
 	public ResponseBean saveBook(@PathVariable("actionType") String actionType,
 								 @RequestBody(required = true) String reqStr) throws Exception {
 		ResponseBean response = new ResponseBean();

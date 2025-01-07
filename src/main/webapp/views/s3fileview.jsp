@@ -41,7 +41,7 @@ pageEncoding="ISO-8859-1"%>
                 			<td>${awss3.bucketName}</td>
                 			<td>${awss3.keyName}</td>
                 			<td>${awss3.keyType}</td>
-                			<td><a href="<c:url value='/api/v1/aws/s3/downloads3file?bucketName=${awss3.bucketName}&fileName=${awss3.keyName}&fileType=${awss3.keyType}' />" >Doqnload</a></td>
+                			<td><a href="<c:url value='/api/v1/aws/s3/ui/downloads3file?bucketName=${awss3.bucketName}&fileName=${awss3.keyName}&fileType=${awss3.keyType}' />" >Doqnload</a></td>
                 			<td><a href="<c:url value='/api/v1/templates/deletes3file?bucketName=${awss3.bucketName}&fileName=${awss3.keyName}&fileType=${awss3.keyType}' />" >Delete</a></td>
                 		</tr>
                 	</c:forEach>

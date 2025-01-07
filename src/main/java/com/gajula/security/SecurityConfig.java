@@ -40,18 +40,20 @@ public class SecurityConfig {
 		admin.info("Configure---> Start");
 		http
 				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-				//.csrf(AbstractHttpConfigurer::disable)
+				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests((authorize) -> authorize
 						.requestMatchers("/swagger-ui.html","/swagger-ui/**", "/swagger-resources/**",
 								"/webjars/**", "/v3/api-docs/**", "/h2-console/**",
 								"/home/**", "/views/**",
 								"/css/**", "/js/**", "/images/**",
-								"/api/v1/templates/**", "/api/v1/master/**").permitAll()
-						.requestMatchers("/api/v1/aws/s3/**", "/api/v1/book/**", "/api/v1/customer/**").authenticated()
+								"/api/v1/templates/**", "/api/v1/master/**",
+								"/api/v1/aws/s3/ui/**", "/api/v1/book/ui/**", "/api/v1/customer/ui/**").permitAll()
+						.requestMatchers("/api/v1/aws/s3/service/**", "/api/v1/book/service/**",
+								"/api/v1/customer/service/**").authenticated()
 				)
 				.exceptionHandling(exp -> exp.authenticationEntryPoint(authenticationEntryPoint())
 						                     .accessDeniedHandler(accessDeniedHandler()))
-				//.csrf(AbstractHttpConfigurer::disable)
+				.csrf(AbstractHttpConfigurer::disable)
 				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.oauth2ResourceServer((oauth2) ->
@@ -108,7 +110,7 @@ public class SecurityConfig {
 		corsConfig.addAllowedMethod("PATCH");
 		corsConfig.addAllowedMethod("POST");
 		corsConfig.addAllowedMethod("OPTIONS");
-		corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
+		corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200/", "http://localhost:8080/"));
 		corsConfig.setAllowedHeaders(Arrays.asList("*"));
 		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -32,7 +32,7 @@ public class AwsS3RestController {
     @Autowired
     AwsS3Service awsS3Service;
 
-    @GetMapping(value = "/lists3files", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = {"/service/lists3files" , "/ui/lists3files" }, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseBean lists3files(@RequestBody(required = true) String reqStr) throws Exception {
         ResponseBean response = new ResponseBean();
         try {
@@ -48,7 +48,7 @@ public class AwsS3RestController {
         return response;
     }
 
-    @GetMapping(value = "/downloads3file")
+    @GetMapping(value = { "/service/downloads3file", "/ui/downloads3file"} )
     public void downloadFileFromS3Bucket(
             //@RequestBody(required = true) String reqStr,
             @RequestParam("bucketName")String bucketName,

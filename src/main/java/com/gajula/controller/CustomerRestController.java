@@ -22,7 +22,7 @@ public class CustomerRestController {
 	@Autowired
 	CustomerService customerService;
 
-	@GetMapping(value = "/getCustomer", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = { "/service/getCustomer", "/ui/getCustomer"}, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getCustomer() throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
@@ -35,7 +35,7 @@ public class CustomerRestController {
 		return response;
 	}
 
-	@GetMapping(value = "/getCustomer/{custId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = { "/service/getCustomer/{custId}", "/ui/getCustomer/{custId}" }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getCustomerByID(@PathVariable(required = false)String custId) throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
@@ -52,7 +52,7 @@ public class CustomerRestController {
 		return response;
 	}
 
-	@GetMapping(value = "/getVehicle", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = { "/service/getVehicle", "/ui/getVehicle" }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean getVehicle() throws Exception {
 		ResponseBean response = new ResponseBean();
 		try {
@@ -65,7 +65,7 @@ public class CustomerRestController {
 		return response;
 	}
 
-	@PostMapping(value = "/saveCustomer/{actionType}", produces = "application/json", consumes = "application/json")
+	@PostMapping(value = { "/service/saveCustomer/{actionType}", "/ui/saveCustomer/{actionType}" }, produces = "application/json", consumes = "application/json")
 	public ResponseBean saveCustomer(@PathVariable("actionType") String actionType,
 				@RequestBody(required = true) String reqStr) throws Exception {
 		ResponseBean response = new ResponseBean();

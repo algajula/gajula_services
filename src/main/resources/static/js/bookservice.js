@@ -11,7 +11,7 @@ $(document).ready(function () {
           console.log('Request---'+JSON.stringify(data));
           $.ajax({
               type: "POST",
-              url: contextPath+"/api/v1/book/saveBook/save",
+              url: contextPath+"/api/v1/book/ui/saveBook/save",
               data: JSON.stringify(data),
               contentType: "application/json",
               headers:{

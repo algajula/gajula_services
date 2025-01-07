@@ -22,6 +22,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response, 
 	AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		admin.info("403 FORBIDDEN CUSTOME");
+		admin.info("accessDeniedException==="+accessDeniedException.getMessage());
+		admin.info("accessDeniedException==="+accessDeniedException.getCause());
 		ResponseBean res = new ResponseBean();
 		res.setStatusCode("403");
 		res.setStatusDescription("FORBIDDEN");

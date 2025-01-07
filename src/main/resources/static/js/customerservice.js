@@ -11,7 +11,7 @@ $('#savecustomer').click(function() {
           console.log('Request---'+JSON.stringify(data));
           $.ajax({
               type: "POST",
-              url: contextPath+"/api/v1/customer/saveCustomer/save",
+              url: contextPath+"/api/v1/customer/ui/saveCustomer/save",
               data: JSON.stringify(data),
               contentType: "application/json",
               headers:{
