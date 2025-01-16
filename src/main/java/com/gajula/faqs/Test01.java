@@ -2,10 +2,10 @@ package com.gajula.faqs;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 import static com.gajula.faqs.GajulaUtilHelper.getEmployeeList;
 
 public class Test01 {
+
     public final static int intValue = 1234214512;
     public final static String intStringValue = "01010122013003010131001";
     public final static int[] intArrayValue = {1, 2, 4, 2, 6, 6, 2, 3, 5, 1, 3};
@@ -17,7 +17,6 @@ public class Test01 {
     public final static List<String> listString = Arrays.asList("test", "gajula", "bakash", "test", "test2", "gajula", "abc", "test3");
 
     public static void main(String[] args) {
-
         // integers == 1234523, {1,2,3,2,5,7,2,9}, {"123", 435", 786"}, ("123", "435"), (123, 435)
         // strings  == "gajula", {"test", "gajula", "bakash"}, ("test", "gajula", "bakash")
 

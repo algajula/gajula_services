@@ -59,3 +59,25 @@ kafka-console-producer.bat --bootstrap-server localhost:9092 --topic CUSTOMER_TO
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic CUSTOMER_TOPIC  --from-beginning
 message:
 {"custNumber":1103,"custName":"test3","emailAddress":"test3@GMAIL.COM","phone":1112223331,"createdDate":"2021-08-13 08:20:03","modifiedDate":"2021-08-13 08:20:03","vehicleList":[{"vin":"vin1103","vrn":"vrn1003"}]}
+
+
+NodeJS
+======
+SET PATH=C:\ALLABAKASH\setups\nodejs;%PATH%
+SET PATH=C:\ALLABAKASH\setups\nodejs\node_modules\.bin;%PATH%
+npm install -g @angular/cli
+SET PATH=C:\Users\algajula\AppData\Roaming\npm;%PATH%
+SET PATH=C:\Users\algajula\AppData\Roaming\npm\node_modules\@angular\cli\bin;%PATH%
+npm config set strict ssl false
+ng --version
+npm -v
+node -v
+
+Create App
+==========
+ng new gajula_ui
+ng generate component components/customer --module=app
+ng generate component components/book --module=app
+ng generate component components/awss3 --module=app
+
+npm install
