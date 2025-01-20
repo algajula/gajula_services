@@ -21,6 +21,22 @@ SET PATH=C:\Windows\System32;%PATH%
 SET PATH=C:\winutils\bin;%PATH%
 Modules: C:\ALLABAKASH\setups\jboss\modules\javax\servlet
 
+MAVEN PATH
+==========
+SET PATH=C:\ALLABAKASH\setups\jdk-17.0.11\bin;%PATH%
+SET JRE_HOME=C:\ALLABAKASH\setups\jdk-17.0.11
+SET JAVA_HOME=C:\ALLABAKASH\setups\jdk-17.0.11
+SET M2_HOME=C:\ALLABAKASH\setups\apache-maven-3.9.9
+SET M2=C:\ALLABAKASH\setups\apache-maven-3.9.9\bin
+SET PATH=C:\ALLABAKASH\setups\apache-maven-3.9.9\bin;%PATH%
+
+> mvn clean install -DskipTests spring-boot:run
+
+GRADLE
+======
+SET GRADLE_HOME=C:\ALLABAKASH\setups\gradle
+SET PATH=C:\ALLABAKASH\setups\gradle\bin;%PATH%
+
 Modules:
 Database: H2 database
 Schedular: cron jobs
