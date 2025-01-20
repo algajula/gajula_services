@@ -20,13 +20,13 @@ public class CustomerValidator {
         HashMap<String, String> labels = new HashMap<>();
         try{
             if(!NumberUtils.isDigits(String.valueOf(customer.getCustNumber()))){
-                labels.put("title","CustNumber should be numeric!");
+                labels.put("custNumberErr","CustNumber should be numeric!");
             }
             if(StringUtils.isEmpty(customer.getCustName())){
-                labels.put("genre","CustName should not be emptye!");
+                labels.put("custNameErr","CustName should not be emptye!");
             }
             if(StringUtils.isEmpty(customer.getEmailAddress())){
-                labels.put("genre","EmailAddress should not be emptye!");
+                labels.put("emailAddressErr","EmailAddress should not be emptye!");
             }
             admin.info("labels  map "+labels);
             response.setResult(labels);
