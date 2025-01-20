@@ -21,6 +21,8 @@ public class APIConstants {
     public static final String DATA_ERR_DESC = "ERR";
 	public static final String DATA_TIMEOUT_CODE = "03";
 	public static final String DATA_TIMEOUT_DESC = "TIMEOUT";
+	public static final String DATA_VALIDATION_CODE = "04";
+	public static final String DATA_VALIDATION_DESC = "VALIDATION";
 
     @SuppressWarnings("deprecation")
     public static ObjectMapper getObjectMapper() {
