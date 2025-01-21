@@ -92,12 +92,17 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public boolean saveCustomerDetails(CustomerDto customer) throws Exception {
+    public boolean saveCustomerDetails(CustomerDto customer, String actionType) throws Exception {
         boolean flag = false;
         CustomerDto persistCust = new CustomerDto();
         Set<VehicleDto> vehList = new HashSet<VehicleDto>();
         try {
             admin.info("saveCustomerDetails start");
+            if(actionType.equalsIgnoreCase("edit")){
+                admin.info("Existing before fetch request customer ID===="+customer.getCust_uid());
+                persistCust = customerRespository.findById(customer.getCust_uid()).get();
+                admin.info("Existing after fetch customer ID===="+persistCust.getCust_uid());
+            }
             persistCust.setCustName(customer.getCustName());
             persistCust.setCustNumber(customer.getCustNumber());
             persistCust.setEmailAddress(customer.getEmailAddress());
@@ -111,6 +116,7 @@ public class CustomerServiceImpl implements CustomerService{
             flag = customerDao.saveCustomerDetails(persistCust);
             admin.info("saveCustomerDetails start");
         } catch (Exception e) {
+            e.printStackTrace();
             admin.info("error in saveCustomerDetails=" + e.getMessage());
         }
         return flag;

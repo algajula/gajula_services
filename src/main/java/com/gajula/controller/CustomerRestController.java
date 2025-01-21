@@ -1,6 +1,7 @@
 package com.gajula.controller;
 
 import com.gajula.exception.CustomException;
+import com.gajula.model.CustomerBean;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.CustomerService;
 import com.gajula.dto.CustomerDto;
@@ -12,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 
 @RestController
@@ -76,15 +79,17 @@ public class CustomerRestController {
 		boolean updtedFlag = false;
 		try {
 			admin.info("saveCustomer start actionType==="+actionType);
-			CustomerDto customer = APIConstants.getObjectMapper().readValue(reqStr,CustomerDto.class);
-			admin.info("request=======" + customer.getCreatedDate());
-			response = customerValidator.validateForm(customer);
-			String errorCode = response.getStatusCode();
-			admin.info("Has Errors========="+errorCode);
-			if(errorCode.equalsIgnoreCase("04")){
+			CustomerBean customerReq = APIConstants.getObjectMapper().readValue(reqStr, CustomerBean.class);
+			admin.info("request=======" + customerReq.getCreatedDate());
+			HashMap<String, String> errorMap  = customerValidator.validateForm(customerReq);
+			if(!errorMap.isEmpty()){
+				response.setResult(errorMap);
+				response.setStatusCode(APIConstants.DATA_VALIDATION_CODE);
+				response.setStatusDescription(APIConstants.DATA_VALIDATION_DESC);
 				return response;
 			}else{
-				updtedFlag = customerService.saveCustomerDetails(customer);
+				CustomerDto customer = maptoPersistenceBean(customerReq);
+				updtedFlag = customerService.saveCustomerDetails(customer, actionType);
 				if (updtedFlag) {
 					response.setStatusCode(APIConstants.STATUS_SUCCESS_CODE);
 					response.setStatusDescription(APIConstants.STATUS_SUCCESS_DESC);
@@ -101,5 +106,16 @@ public class CustomerRestController {
 			throw new CustomException("error occured in saveCustomer service" + e.getMessage());
 		}
 		return response;
+	}
+
+	public CustomerDto maptoPersistenceBean(CustomerBean request){
+		CustomerDto customer = new CustomerDto();
+		customer.setCust_uid(request.getCust_uid());
+		customer.setCustNumber(Long.parseLong(request.getCustNumber()));
+		customer.setCustName(request.getCustName());
+		customer.setEmailAddress(request.getEmailAddress());
+		customer.setPhone(Integer.parseInt(request.getPhone()));
+		customer.setCreatedDate(APIConstants.convertStringtoDate(request.getCreatedDate()));
+		return customer;
 	}
 }

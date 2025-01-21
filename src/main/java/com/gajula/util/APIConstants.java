@@ -9,6 +9,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.util.StringUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class APIConstants {
 
     private final static Logger admin = LogManager.getLogger(APIConstants.class.getName());
@@ -91,5 +96,20 @@ public class APIConstants {
 			return null;
 		else
 			return fileName.substring(0,fileName.lastIndexOf("."));
+	}
+
+	public static Date convertStringtoDate(String reqdate){
+		//input 2025-01-20 18:30:00
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
+		Date date;
+		try{
+			admin.info("Req Date==============="+reqdate);
+			date = format.parse(reqdate);
+			System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
+		}catch (Exception e){
+			admin.error("ReqDate Error=="+e.getMessage());
+			return new Date();
+		}
+		return date;
 	}
 }

@@ -32,7 +32,7 @@ public class CustomerDto implements Serializable {
     private String emailAddress;
 
     @Column(name = "PHONE", length = 10)
-    private long phone;
+    private Integer phone;
 
     @Column(name = "CREATEDDATE", columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -84,11 +84,11 @@ public class CustomerDto implements Serializable {
 	this.emailAddress = emailAddress;
     }
 
-    public long getPhone() {
+    public Integer getPhone() {
 	return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(Integer phone) {
 	this.phone = phone;
     }
 

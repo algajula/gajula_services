@@ -2,6 +2,7 @@ package com.gajula.listener;
 
 import com.gajula.dto.BookDto;
 import com.gajula.dto.CustomerDto;
+import com.gajula.model.CustomerBean;
 import com.gajula.model.ResponseBean;
 import com.gajula.service.BookService;
 import com.gajula.service.CustomerService;
@@ -43,9 +44,10 @@ public class GajulaKafkaListener {
 		admin.info(String.format("$$$$ =>CUSTOMER Consumed message: " + payload));
 		try{
 			admin.info("process CUSTOMER start");
-			CustomerDto customer = APIConstants.getObjectMapper().readValue(payload, CustomerDto.class);
+			CustomerBean customerReq = APIConstants.getObjectMapper().readValue(payload, CustomerBean.class);
+			CustomerDto customer = maptoPersistenceBean(customerReq);
 			admin.info("CustomeId=======" + customer.getCustNumber());
-			boolean updtedFlag = customerService.saveCustomerDetails(customer);
+			boolean updtedFlag = customerService.saveCustomerDetails(customer, "kafka");
 			admin.info("Customer addedd successfully! "+updtedFlag);
 			ack.acknowledge();
 			admin.info("process CUSTOMER end");
@@ -70,5 +72,17 @@ public class GajulaKafkaListener {
 			admin.error("process BOOK Error "+e.getMessage());
 			kafkaTemplate.send(bookErrorTopic, "BOOK_TOPIC_ERROR",payload);
 		}
+	}
+
+
+	public CustomerDto maptoPersistenceBean(CustomerBean request){
+		CustomerDto customer = new CustomerDto();
+		customer.setCust_uid(request.getCust_uid());
+		customer.setCustNumber(Long.parseLong(request.getCustNumber()));
+		customer.setCustName(request.getCustName());
+		customer.setEmailAddress(request.getEmailAddress());
+		customer.setPhone(Integer.parseInt(request.getPhone()));
+		customer.setCreatedDate(APIConstants.convertStringtoDate(request.getCreatedDate()));
+		return customer;
 	}
 }
