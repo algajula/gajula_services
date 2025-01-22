@@ -99,21 +99,33 @@ public class CustomerServiceImpl implements CustomerService{
         try {
             admin.info("saveCustomerDetails start");
             if(actionType.equalsIgnoreCase("edit")){
+                admin.info("======= EDIT ==================");
                 admin.info("Existing before fetch request customer ID===="+customer.getCust_uid());
                 persistCust = customerRespository.findById(customer.getCust_uid()).get();
                 admin.info("Existing after fetch customer ID===="+persistCust.getCust_uid());
+                persistCust.setCustName(customer.getCustName());
+                persistCust.setCustNumber(customer.getCustNumber());
+                persistCust.setEmailAddress(customer.getEmailAddress());
+                persistCust.setPhone(customer.getPhone());
+                persistCust.setCreatedDate(customer.getCreatedDate());
+                persistCust.setModifiedDate(customer.getModifiedDate());
+                vehList.addAll(customer.getVehicleList());
+                persistCust.setVehicleList(vehList);
+                flag = customerDao.saveCustomerDetails(persistCust);
+                admin.info("updated existing customer successfully========"+flag);
+            }else if(actionType.equalsIgnoreCase("add")){
+                admin.info("======= ADD ==================");
+                persistCust.setCustName(customer.getCustName());
+                persistCust.setCustNumber(customer.getCustNumber());
+                persistCust.setEmailAddress(customer.getEmailAddress());
+                persistCust.setPhone(customer.getPhone());
+                persistCust.setCreatedDate(customer.getCreatedDate());
+                persistCust.setModifiedDate(customer.getModifiedDate());
+                vehList.addAll(customer.getVehicleList());
+                persistCust.setVehicleList(vehList);
+                CustomerDto custObj = customerRespository.save(customer);
+                admin.info("new customer added successfully========"+custObj.getCust_uid());
             }
-            persistCust.setCustName(customer.getCustName());
-            persistCust.setCustNumber(customer.getCustNumber());
-            persistCust.setEmailAddress(customer.getEmailAddress());
-            persistCust.setPhone(customer.getPhone());
-            persistCust.setCreatedDate(customer.getCreatedDate());
-            persistCust.setModifiedDate(customer.getModifiedDate());
-            customer.getVehicleList().stream().forEach(vehicle -> {
-                vehList.add(vehicle);
-            });
-            persistCust.setVehicleList(vehList);
-            flag = customerDao.saveCustomerDetails(persistCust);
             admin.info("saveCustomerDetails start");
         } catch (Exception e) {
             e.printStackTrace();
