@@ -98,18 +98,4 @@ public class APIConstants {
 			return fileName.substring(0,fileName.lastIndexOf("."));
 	}
 
-	public static Date convertStringtoDate(String reqdate){
-		//input 2025-01-20 18:30:00
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
-		Date date;
-		try{
-			admin.info("Req Date==============="+reqdate);
-			date = format.parse(reqdate);
-			System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
-		}catch (Exception e){
-			admin.error("ReqDate Error=="+e.getMessage());
-			return new Date();
-		}
-		return date;
-	}
 }

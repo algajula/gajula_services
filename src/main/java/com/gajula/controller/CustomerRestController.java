@@ -6,6 +6,7 @@ import com.gajula.model.ResponseBean;
 import com.gajula.service.CustomerService;
 import com.gajula.dto.CustomerDto;
 import com.gajula.util.APIConstants;
+import com.gajula.util.DateUtilHelper;
 import com.gajula.validator.CustomerValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -115,7 +116,7 @@ public class CustomerRestController {
 		customer.setCustName(request.getCustName());
 		customer.setEmailAddress(request.getEmailAddress());
 		customer.setPhone(Integer.parseInt(request.getPhone()));
-		customer.setCreatedDate(APIConstants.convertStringtoDate(request.getCreatedDate()));
+		customer.setCreatedDate(DateUtilHelper.convertStringtoDate(request.getCreatedDate()));
 		return customer;
 	}
 }

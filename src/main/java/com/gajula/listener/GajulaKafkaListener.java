@@ -7,6 +7,7 @@ import com.gajula.model.ResponseBean;
 import com.gajula.service.BookService;
 import com.gajula.service.CustomerService;
 import com.gajula.util.APIConstants;
+import com.gajula.util.DateUtilHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class GajulaKafkaListener {
 		customer.setCustName(request.getCustName());
 		customer.setEmailAddress(request.getEmailAddress());
 		customer.setPhone(Integer.parseInt(request.getPhone()));
-		customer.setCreatedDate(APIConstants.convertStringtoDate(request.getCreatedDate()));
+		customer.setCreatedDate(DateUtilHelper.convertStringtoDate(request.getCreatedDate()));
 		return customer;
 	}
 }
